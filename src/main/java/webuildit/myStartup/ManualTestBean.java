@@ -29,7 +29,7 @@ public class ManualTestBean {
         this.transactionRepository=transactionRepository;
 
     }
-    //TESTESTESTEST
+   
 
     @EventListener(ApplicationReadyEvent.class)
     public void callController(){
