@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-import webuildit.myStartup.controller.MoneyController;
+import webuildit.myStartup.controller.CCTControllerImpl;
 import webuildit.myStartup.model.Classification;
 import webuildit.myStartup.model.CreditCardTransaction;
 import webuildit.myStartup.model.Customer;
@@ -21,35 +21,39 @@ public class ManualTestBean {
     // Vorsicht diese Klasse ist nur für Übungszwecke,
     // sie sollte nie in einer produktiven Applikation sein
 
-    MoneyController moneyController;
+    CCTControllerImpl CCTControllerImpl;
     TransactionRepository transactionRepository;
 
-    ManualTestBean(MoneyController moneyController, TransactionRepository transactionRepository){
-        this.moneyController = moneyController;
+    ManualTestBean(CCTControllerImpl CCTControllerImpl, TransactionRepository transactionRepository){
+        this.CCTControllerImpl = CCTControllerImpl;
         this.transactionRepository=transactionRepository;
 
     }
-    //j kölajfiöajwilfjeawljfiölewajiflöa
 
     @EventListener(ApplicationReadyEvent.class)
     public void callController(){
 
         // erstelle Beispielskunden und Transaktionen
         Customer customer_1 = new Customer("Kunde1", "meineAdresse", 678834);
-        Vendor v1 = new Vendor("Vendor1", "someAddress", Classification.BERGBAU);
-        Vendor v2 = new Vendor("Ven2", "jklöafe", Classification.LANDFORSTWIRTSCHAFT);
+        Customer customer_2 = new Customer("Kunde1", "meineAdresse", 678834);
+        Vendor v1 = new Vendor(1,"Vendor1", "someAddress", Classification.BERGBAU);
+        Vendor v2 = new Vendor(2,"Ven2", "jklöafe", Classification.LANDFORSTWIRTSCHAFT);
         CreditCardTransaction c1 = new CreditCardTransaction("Descr", 189, true,  LocalDate.of(2014,11,6));
         CreditCardTransaction c2 = new CreditCardTransaction("whatever", 27, true,  LocalDate.of(2020,01,20));
 
         //Ordne den Transaktionen Kunden zu
         c1.setCustomer(customer_1);
         c1.setVendor(v1);
+        c2.setVendor(v2);
+        c2.setCustomer(customer_2);
 
         // speichere alle Transaktionen
         this.transactionRepository.saveAll(Arrays.asList(c1, c2));
 
         // Test: gib einen Namen aus
         log.info(customer_1.getCName());
+       // CCTControllerImpl.getTransactionFees(v1.getVUuid());
+        log.info(String.valueOf(v1.getVId()));
 
 //        log.info(this.moneyController.getName());
 //        log.info(this.moneyController.getServiceName());

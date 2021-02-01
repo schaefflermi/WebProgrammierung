@@ -15,9 +15,11 @@ import java.util.UUID;
 @Entity
 public class Vendor {
     // automatisch generierte UUID, die den Verkäufer eindeutig identifiziert
+
+   // @Column(name = "UUID", length = 16, unique = true, nullable = false)
+   // private UUID vUuid = UUID.randomUUID();
     @Id
-    @Column(name = "UUID", length = 16, unique = true, nullable = false)
-    private UUID vUuid = UUID.randomUUID();
+    private long vId;
     private String vName;
     private String vAddress;
     private Classification classification;
@@ -30,7 +32,7 @@ public class Vendor {
 
 
     // Konstruktor
-    public Vendor(String vName, String vAddress, Classification classification){
+    public Vendor(long vId,String vName, String vAddress, Classification classification){
         this.vName=vName;
         this.vAddress=vAddress;
         this.classification=classification;
