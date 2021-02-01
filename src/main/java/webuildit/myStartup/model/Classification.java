@@ -2,19 +2,21 @@ package webuildit.myStartup.model;
 
 public enum Classification {
     LANDFORSTWIRTSCHAFT,
-    BERGBAU;
-
+    BERGBAU,
+    DIENSTLEISTUNGEN,
+    BAUGEWERBE
+    ;
 
     //    VerarbeitendesGewerbe,
 //            Energieversorgung,
 //    Wasserversorgung,
-//            Baugewerbe,
+//            ,
 //    Handel,
 //            Verkehr,
 //    Gastgewerbe,
 //    InformationKommunikation,
-//            FSI,
-//    Dienstleistungen,
+//   FSI         ,
+//    ,
 //    GesundheitsSozialwesen,
 //    KunstUnterhaltung;
 
