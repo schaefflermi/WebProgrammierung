@@ -2,7 +2,6 @@ package webuildit.myStartup.model;
 
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,7 +27,7 @@ public class Customer {
 
     // 1:n Beziehung Kunde - Transaktion
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<CreditCardTransaction> transactions;
+    private List<Creditcardtransaction> transactions;
 
     // Konstruktor
     public Customer(String cName, String cAddress, int netIncome){

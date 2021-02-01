@@ -2,29 +2,31 @@ package webuildit.myStartup.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import webuildit.myStartup.model.CreditCardTransaction;
+import webuildit.myStartup.model.Creditcardtransaction;
 import webuildit.myStartup.repository.TransactionRepository;
-import webuildit.myStartup.service.MoneyServiceImpl;
-import webuildit.myStartup.service.MoneyServiceInterface;
+import webuildit.myStartup.service.VendorService;
 
 import java.util.List;
 import java.util.UUID;
 
 @Controller
 public class CCTControllerImpl implements CCTController {
-     MoneyServiceInterface moneyService;
+     VendorService moneyService;
      TransactionRepository transactionRepository;
 
     @Autowired
     public CCTControllerImpl(){
-       // this.moneyService = moneyService;
-    }
 
-    @Override
-    public Double getTransactionFees(long vId) {
-        transactionRepository.findAllById(vId);
-     // System.out.println(l1.get(0));
-
-        return null;
     }
+  // @Override
+   // public String getTransaction(UUID tUuid){
+     //   List<Creditcardtransaction> tmp = this.transactionRepository.findAllCreditcardtransactionBytUuid(tUuid);
+       // for(int i =0; i > tmp.size();i++) {
+       //     return tmp.get(i).getDescription();
+        //}
+
+        //return tmp.get(0).getDescription();
+
+  //  }
+
 }

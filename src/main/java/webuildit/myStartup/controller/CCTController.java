@@ -6,5 +6,5 @@ import java.util.UUID;
  * @Author Johannes Wiest
  */
 public interface CCTController {
-    Double getTransactionFees(long vId);
+//public String getTransaction(UUID tUuid);
 }

@@ -15,11 +15,10 @@ import java.util.UUID;
 @Entity
 public class Vendor {
     // automatisch generierte UUID, die den Verkäufer eindeutig identifiziert
-
-   // @Column(name = "UUID", length = 16, unique = true, nullable = false)
-   // private UUID vUuid = UUID.randomUUID();
     @Id
-    private long vId;
+    @Column(name = "UUID", length = 16, unique = true, nullable = false)
+    private UUID vUuid = UUID.randomUUID();
+   //private long vId;
     private String vName;
     private String vAddress;
     private Classification classification;
@@ -28,7 +27,7 @@ public class Vendor {
 
     // 1:n Beziehung Verkäufer - Transaktion
     @OneToMany(mappedBy = "vendor", cascade = CascadeType.ALL)
-    private List<CreditCardTransaction> transactions;
+    private List<Creditcardtransaction> transactions;
 
 
     // Konstruktor

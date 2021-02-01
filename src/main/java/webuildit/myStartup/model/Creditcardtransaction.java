@@ -13,7 +13,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @Entity
-public class CreditCardTransaction {
+public class Creditcardtransaction {
 
     // automatisch generierte UUID, die den Verkäufer eindeutig identifiziert
     @Id
@@ -37,7 +37,7 @@ public class CreditCardTransaction {
     private Vendor vendor;
 
     // Konstruktor
-    public CreditCardTransaction(String description, double sum, boolean status, LocalDate tDate){
+    public Creditcardtransaction(String description, double sum, boolean status, LocalDate tDate){
         this.description=description;
         this.sum=sum;
         this.status=status;
