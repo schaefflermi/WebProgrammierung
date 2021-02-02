@@ -17,12 +17,12 @@ public class Creditcardtransaction {
 
     // automatisch generierte UUID, die den Verkäufer eindeutig identifiziert
     @Id
-    @Column(name = "UUID", length = 16, unique = true, nullable = false)
+    @Column(name = "UUID",  unique = true, nullable = false)
     private UUID tUuid = UUID.randomUUID();
     private String description;
     private double sum;
     private boolean status;
-    private LocalDate tDate;
+    private LocalDate tdate;
     private static final float TFEE = 0.02f;
 
 
@@ -37,11 +37,11 @@ public class Creditcardtransaction {
     private Vendor vendor;
 
     // Konstruktor
-    public Creditcardtransaction(String description, double sum, boolean status, LocalDate tDate){
+    public Creditcardtransaction(String description, double sum, boolean status, LocalDate tdate){
         this.description=description;
         this.sum=sum;
         this.status=status;
-        this.tDate = tDate;
+        this.tdate = tdate;
     }
 
 }

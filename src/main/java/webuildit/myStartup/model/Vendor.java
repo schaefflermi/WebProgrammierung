@@ -16,7 +16,7 @@ import java.util.UUID;
 public class Vendor {
     // automatisch generierte UUID, die den Verkäufer eindeutig identifiziert
     @Id
-    @Column(name = "UUID", length = 16, unique = true, nullable = false)
+    @Column(name = "UUID",  unique = true, nullable = false)
     private UUID vUuid = UUID.randomUUID();
    //private long vId;
     private String vName;

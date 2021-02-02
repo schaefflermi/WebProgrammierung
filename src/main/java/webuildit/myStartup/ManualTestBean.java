@@ -122,8 +122,10 @@ public class ManualTestBean {
         log.info(String.valueOf(vendorService.getTransactionFee()));
         //vendorService.getTransactionFee();
      //   CCTControllerImpl.getTransaction(c1.getTUuid());
-      //  log.info(String.valueOf(transactionRepository.findAllByUuid(c1.getTUuid())));
-       //  log.info(String.valueOf(c1.getTUuid()));
+       // log.info(String.valueOf(transactionRepository.findBytUuid(c1.getTUuid())));
+        log.info("find by v uuid:");
+        //log.info(String.valueOf(transactionRepository.findByVendorUuid(v1.getVUuid())));
+        // log.info(String.valueOf(c1.getTUuid()));
 
        // CCTControllerImpl.getTransactionFees(v1.getVUuid());
 
@@ -131,6 +133,12 @@ public class ManualTestBean {
 //        log.info(this.moneyController.getName());
 //        log.info(this.moneyController.getServiceName());
 //        log.info(this.artistService.getName());
+
+
+
+        //LocalDate start = LocalDate.ofEpochDay(System.currentTimeMillis() / (24 * 60 * 60 * 1000) ).withDayOfMonth(1);
+        log.info("--------- Get fees for startup: -----------");
+        log.info(String.valueOf(vendorService.getTransactionFeeForStartup(LocalDate.of(2020, 03, 01), LocalDate.of(2020, 03, 31))));
     }
 
 }
