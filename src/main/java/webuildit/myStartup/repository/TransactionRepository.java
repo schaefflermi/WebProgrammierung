@@ -2,7 +2,9 @@ package webuildit.myStartup.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import webuildit.myStartup.model.Classification;
 import webuildit.myStartup.model.Creditcardtransaction;
+import webuildit.myStartup.model.Vendor;
 
 import java.time.LocalDate;
 import java.util.List;

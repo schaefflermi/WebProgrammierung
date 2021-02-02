@@ -2,8 +2,11 @@ package webuildit.myStartup.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import webuildit.myStartup.model.Classification;
 import webuildit.myStartup.model.Creditcardtransaction;
+import webuildit.myStartup.model.Vendor;
 import webuildit.myStartup.repository.TransactionRepository;
+import webuildit.myStartup.repository.VendorRepository;
 
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -12,9 +15,12 @@ import java.util.UUID;
 @Service
 public class VendorServiceImpl implements VendorService {
     TransactionRepository transactionRepository;
+    VendorRepository vendorRepository;
+
     @Autowired
-    public VendorServiceImpl(TransactionRepository transactionRepository){
+    public VendorServiceImpl(TransactionRepository transactionRepository, VendorRepository vendorRepository){
         this.transactionRepository = transactionRepository;
+        this.vendorRepository=vendorRepository;
 
     }
 
@@ -64,6 +70,23 @@ public class VendorServiceImpl implements VendorService {
         }
         fee = sum *0.02;
         return fee;
+    }
+
+    // berechnet den Gesamtumsatz für ein Gewerbe
+    public Double getIncomeForClassification(Classification classification){
+        List<Vendor> vByClass = this.vendorRepository.findByClassification(classification);
+        double sumIncome=0;
+        for (int i = 0; i < vByClass.size(); i++){
+            for(int j=0; i< vByClass.get(i).getTransactions().size(); j++){
+                sumIncome= vByClass.get(i).getTransactions().get(j).getSum();
+            }
+        }
+        return sumIncome;
+    }
+
+    // findet alle Verkäufer einer Klassifikation
+    public List<Vendor> findByClassification(Classification classification){
+        return this.findByClassification(classification);
     }
 
 

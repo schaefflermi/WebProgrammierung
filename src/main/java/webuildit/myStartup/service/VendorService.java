@@ -1,6 +1,8 @@
 package webuildit.myStartup.service;
 
+import webuildit.myStartup.model.Classification;
 import webuildit.myStartup.model.Creditcardtransaction;
+import webuildit.myStartup.model.Vendor;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -10,4 +12,6 @@ public interface VendorService {
     List<Creditcardtransaction> getAllCreditcardtransactions(UUID tUuid);
     Double getTransactionFee();
     Double getTransactionFeeForStartup(LocalDate start, LocalDate end);
+    List<Vendor> findByClassification(Classification classification);
+    Double getIncomeForClassification(Classification classification);
 }

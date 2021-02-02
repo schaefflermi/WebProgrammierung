@@ -11,6 +11,7 @@ import webuildit.myStartup.model.Creditcardtransaction;
 import webuildit.myStartup.model.Customer;
 import webuildit.myStartup.model.Vendor;
 import webuildit.myStartup.repository.TransactionRepository;
+import webuildit.myStartup.repository.VendorRepository;
 import webuildit.myStartup.service.VendorService;
 import webuildit.myStartup.service.VendorServiceImpl;
 
@@ -29,12 +30,14 @@ public class ManualTestBean {
 
     CCTControllerImpl CCTControllerImpl;
     TransactionRepository transactionRepository;
+    VendorRepository vendorRepository;
     VendorService vendorService;
 
 
-    ManualTestBean(CCTControllerImpl CCTControllerImpl, TransactionRepository transactionRepository, VendorService vendorService){
+    ManualTestBean(CCTControllerImpl CCTControllerImpl, TransactionRepository transactionRepository, VendorRepository vendorRepository, VendorService vendorService){
         this.CCTControllerImpl = CCTControllerImpl;
         this.transactionRepository=transactionRepository;
+        this.vendorRepository=vendorRepository;
         this.vendorService=vendorService;
 
 
@@ -84,8 +87,8 @@ public class ManualTestBean {
         c1.setVendor(v1);
         c2.setVendor(v2);
         c3.setVendor(v3);
-        c4.setVendor(v5);
-        c5.setVendor(v6);
+        c4.setVendor(v4);
+        c5.setVendor(v5);
         c6.setVendor(v6);
         c7.setVendor(v6);
         c8.setVendor(v6);
@@ -99,7 +102,13 @@ public class ManualTestBean {
         cct.add(c1);
         cct.add(c2);
         // speichern wir irgendwo Kunden & Verkäufer?
-
+        v1.setTransactions(Arrays.asList(c1));
+        v2.setTransactions(Arrays.asList(c2));
+        v3.setTransactions(Arrays.asList(c3));
+        v4.setTransactions(Arrays.asList(c4));
+        v5.setTransactions(Arrays.asList(c5));
+        v6.setTransactions(Arrays.asList(c6, c7, c8, c9, c10));
+        this.vendorRepository.saveAll(Arrays.asList(v1,v2,v3,v4,v5,v6));
 
         // Test: gib einen Namen aus
        /* log.info("--------------------------------------------------1");
@@ -134,11 +143,13 @@ public class ManualTestBean {
 //        log.info(this.moneyController.getServiceName());
 //        log.info(this.artistService.getName());
 
+        log.info("------ alle ... in einer KLassifikation");
+       // log.info(String.valueOf(this.vendorService.findByClassification(Classification.BAUGEWERBE)));
+        log.info(String.valueOf(this.vendorService.getIncomeForClassification(Classification.BAUGEWERBE)));
 
 
-        //LocalDate start = LocalDate.ofEpochDay(System.currentTimeMillis() / (24 * 60 * 60 * 1000) ).withDayOfMonth(1);
-        log.info("--------- Get fees for startup: -----------");
-        log.info(String.valueOf(vendorService.getTransactionFeeForStartup(LocalDate.of(2020, 03, 01), LocalDate.of(2020, 03, 31))));
+
+     //   log.info("--------- Get fees for startup - funktioniert!!!: -----------");
+       // log.info(String.valueOf(vendorService.getTransactionFeeForStartup(LocalDate.of(2020, 03, 01), LocalDate.of(2020, 03, 31))));
     }
-
 }
