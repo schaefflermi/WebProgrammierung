@@ -11,9 +11,13 @@ import webuildit.myStartup.model.Creditcardtransaction;
 import webuildit.myStartup.model.Customer;
 import webuildit.myStartup.model.Vendor;
 import webuildit.myStartup.repository.TransactionRepository;
+import webuildit.myStartup.service.VendorService;
+import webuildit.myStartup.service.VendorServiceImpl;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -25,10 +29,14 @@ public class ManualTestBean {
 
     CCTControllerImpl CCTControllerImpl;
     TransactionRepository transactionRepository;
+    VendorService vendorService;
 
-    ManualTestBean(CCTControllerImpl CCTControllerImpl, TransactionRepository transactionRepository){
+
+    ManualTestBean(CCTControllerImpl CCTControllerImpl, TransactionRepository transactionRepository, VendorService vendorService){
         this.CCTControllerImpl = CCTControllerImpl;
         this.transactionRepository=transactionRepository;
+        this.vendorService=vendorService;
+
 
     }
 
@@ -63,40 +71,60 @@ public class ManualTestBean {
 
         //Ordne den Transaktionen Kunden zu
         c1.setCustomer(customer_1);
-        c1.setVendor(v1);
-        c2.setVendor(v2);
         c2.setCustomer(customer_2);
         c3.setCustomer(customer_3);
-        c3.setVendor(v3);
         c4.setCustomer(customer_4);
-        c4.setVendor(v5);
         c5.setCustomer(customer_5);
-        c5.setVendor(v6);
         c6.setCustomer(customer_1);
-        c6.setVendor(v6);
         c7.setCustomer(customer_2);
-        c7.setVendor(v6);
         c8.setCustomer(customer_4);
-        c8.setVendor(v6);
         c9.setCustomer(customer_3);
-        c9.setVendor(v6);
         c10.setCustomer(customer_5);
+        //Ordne den Transaktionen Verkäufer zu
+        c1.setVendor(v1);
+        c2.setVendor(v2);
+        c3.setVendor(v3);
+        c4.setVendor(v5);
+        c5.setVendor(v6);
+        c6.setVendor(v6);
+        c7.setVendor(v6);
+        c8.setVendor(v6);
+        c9.setVendor(v6);
         c10.setVendor(v6);
 
 
         // speichere alle Transaktionen
         this.transactionRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10));
+        List<Creditcardtransaction> cct = new ArrayList<>();
+        cct.add(c1);
+        cct.add(c2);
         // speichern wir irgendwo Kunden & Verkäufer?
 
 
         // Test: gib einen Namen aus
-        String suuid = c1.getTUuid().toString();
-        log.info("--------------------------------------------------");
-        this.transactionRepository.findAllCreditcardtransactionBytUuid(c1.getTUuid());
-        log.info("--------------------------------------------------");
-        log.info("--------------------------------------------------");
+       /* log.info("--------------------------------------------------1");
+        log.info(this.transactionRepository.findAll().get(1).getDescription());*/
+        /*log.info("--------------------------------------------------1");
+       // this.transactionRepository.findAll().get(1).getDescription();
+        log.info(String.valueOf(cct.get(0).getSum()));
+        log.info("--------------------------------------------------1");
+        log.info(cct.get(0).getDescription());*/
+       /* log.info("Summe wird ausgegeben");
+        log.info(String.valueOf(transactionRepository.findAll().get(0).getSum()));
+        log.info("Summe wurde ausgegeben");
+        log.info("Summe wird wiederholt ausgegeben");*/
+        //log.info(String.valueOf(transactionRepository.findAll().get(0).getSum()));
+       /* log.info("Summe wurde wiederholt ausgegeben");
+        log.info(CCTControllerImpl.getTransactionFee());
+        log.info("--------------------------------------------------1");
+        log.info(String.valueOf(cct.get(0).getSum()));
+        log.info("--------------------------------------------------1");*/
+        log.info(String.valueOf(vendorService.getTransactionFee()));
+        //vendorService.getTransactionFee();
      //   CCTControllerImpl.getTransaction(c1.getTUuid());
-        log.info("--------------------------------------------------");
+      //  log.info(String.valueOf(transactionRepository.findAllByUuid(c1.getTUuid())));
+       //  log.info(String.valueOf(c1.getTUuid()));
+
        // CCTControllerImpl.getTransactionFees(v1.getVUuid());
 
 

@@ -11,22 +11,17 @@ import java.util.UUID;
 
 @Controller
 public class CCTControllerImpl implements CCTController {
-     VendorService moneyService;
      TransactionRepository transactionRepository;
 
     @Autowired
     public CCTControllerImpl(){
 
     }
-  // @Override
-   // public String getTransaction(UUID tUuid){
-     //   List<Creditcardtransaction> tmp = this.transactionRepository.findAllCreditcardtransactionBytUuid(tUuid);
-       // for(int i =0; i > tmp.size();i++) {
-       //     return tmp.get(i).getDescription();
-        //}
+    public  String getTransactionFee(){
+       // List<Creditcardtransaction> cct1 = transactionRepository.findAll();
 
-        //return tmp.get(0).getDescription();
+        return "cct1.get(0).getDescription()";
+    }
 
-  //  }
 
 }

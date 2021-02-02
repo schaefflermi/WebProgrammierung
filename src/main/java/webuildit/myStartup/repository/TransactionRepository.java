@@ -11,5 +11,6 @@ import java.util.UUID;
 public interface TransactionRepository extends JpaRepository<Creditcardtransaction, UUID> {
    // List<TransactionRepository> findByCNameContaining(String substring);
     List<Creditcardtransaction> findAllCreditcardtransactionBytUuid(UUID tUuid);
+   // List<Creditcardtransaction> findAllByTuuid(UUID tUuid);
 
 }
