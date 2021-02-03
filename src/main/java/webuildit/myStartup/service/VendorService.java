@@ -14,4 +14,6 @@ public interface VendorService {
     Double getTransactionFeeForStartup(LocalDate start, LocalDate end);
     List<Vendor> findByClassification(Classification classification);
     Double getIncomeForClassification(Classification classification);
+   // void ausgabe(UUID vUuid);
+   Double compareIncome(LocalDate m1start, LocalDate m1end, LocalDate m2start, LocalDate m2end);
 }

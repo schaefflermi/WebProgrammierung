@@ -52,6 +52,7 @@ public class ManualTestBean {
         Customer customer_3 = new Customer("Tony Smith", "Gustav-Landauer-Bogen 5 80797 München", 90000);
         Customer customer_4 = new Customer("Rafael Fogel", "Wiesenstraße 13 76684 Östringen", 60000);
         Customer customer_5 = new Customer ("Andreas Müller", "Merianstraße 7 69168 Wiesloch", 130000);
+        Customer customer_6 = new Customer("Fail Ure", "Can't do it 5 34921 Nothappening", 0);
         Vendor v1 = new Vendor(1,"Thyssen Schachtbau Holding GmbH", "Sandstraße 107/135, 45473 Mülheim an der Ruhr", Classification.BERGBAU);
         Vendor v2 = new Vendor(2,"ECORA GmbH", "Am Blätterrangen 2 95659 Arzberg", Classification.LANDFORSTWIRTSCHAFT);
         Vendor v3 = new Vendor( 3, "SAP SE", "Dietmar-Hopp-Allee 16 69190 Walldorf", Classification.DIENSTLEISTUNGEN);
@@ -59,15 +60,17 @@ public class ManualTestBean {
         Vendor v5 = new Vendor(5, "IFB Ingenieure GmbH", "Mozartstraße 19/2, 73663 Berglen", Classification.BAUGEWERBE);
         Vendor v6 = new Vendor(6, "GOLDBECK GmbH", "Rosengartenweg 3, 67281 Kirchheim an der Weinstraße", Classification.BAUGEWERBE);
         Creditcardtransaction c1 = new Creditcardtransaction("Peter Müller buys some cole", 189, true,  LocalDate.of(2020,11,6));
-        Creditcardtransaction c2 = new Creditcardtransaction("Anja Beck buys from an agriculture company", 75, true,  LocalDate.of(2020,01,20));
+        Creditcardtransaction c2 = new Creditcardtransaction("Anja Beck buys from an agriculture company", 75, true,  LocalDate.of(2021,01,20));
         Creditcardtransaction c3 = new Creditcardtransaction("Tony Smith has a little company using SAP software and buys it in his own name", 15000, true, LocalDate.of(2021, 01, 22));
-        Creditcardtransaction c4 = new Creditcardtransaction("Fogel buys some house related stuff", 1050, true, LocalDate.of(2019, 06, 17));
+        Creditcardtransaction c4 = new Creditcardtransaction("Fogel buys some house related stuff", 1050, true, LocalDate.of(2021, 01, 02));
         Creditcardtransaction c5 = new Creditcardtransaction("A Müller buys a home", 80000,true, LocalDate.of(2020, 03, 18) );
         Creditcardtransaction c6 = new Creditcardtransaction("P Müller plans on building a home", 1500, true, LocalDate.of(2020, 03, 25));
-        Creditcardtransaction c7 = new Creditcardtransaction("Beck builds a terrasse", 3000, true, LocalDate.of(2019, 03,27));
+        Creditcardtransaction c7 = new Creditcardtransaction("Beck builds a terrasse", 3000, true, LocalDate.of(2021, 02,03));
         Creditcardtransaction c8 = new Creditcardtransaction("Fogel build a garage", 1200, true, LocalDate.of(2020, 04, 03));
         Creditcardtransaction c9 = new Creditcardtransaction("Smith bilds a home", 37058, true, LocalDate.of(2020, 03,15 ));
         Creditcardtransaction c10 = new Creditcardtransaction("A Müller buys his sister a flat", 30000, true, LocalDate.of(2020, 03, 19));
+        Creditcardtransaction c11 = new Creditcardtransaction("fail1", 50, false, LocalDate.of(2020, 03, 19));
+        Creditcardtransaction c12 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
 
 
 // do Fehlermeldung, wenn sum > netIncome -> kunde muss zahlen können!!!
@@ -128,11 +131,11 @@ public class ManualTestBean {
         log.info("--------------------------------------------------1");
         log.info(String.valueOf(cct.get(0).getSum()));
         log.info("--------------------------------------------------1");*/
-        log.info(String.valueOf(vendorService.getTransactionFee()));
+     //   log.info(String.valueOf(vendorService.getTransactionFee()));
         //vendorService.getTransactionFee();
      //   CCTControllerImpl.getTransaction(c1.getTUuid());
-       // log.info(String.valueOf(transactionRepository.findBytUuid(c1.getTUuid())));
-        log.info("find by v uuid:");
+      //  log.info(String.valueOf(transactionRepository.findBytUuid(c1.getTUuid())));
+   //     log.info("find by v uuid:");
         //log.info(String.valueOf(transactionRepository.findByVendorUuid(v1.getVUuid())));
         // log.info(String.valueOf(c1.getTUuid()));
 
@@ -143,13 +146,19 @@ public class ManualTestBean {
 //        log.info(this.moneyController.getServiceName());
 //        log.info(this.artistService.getName());
 
-        log.info("------ alle ... in einer KLassifikation");
+      //  log.info("------ alle ... in einer KLassifikation");
        // log.info(String.valueOf(this.vendorService.findByClassification(Classification.BAUGEWERBE)));
-        log.info(String.valueOf(this.vendorService.getIncomeForClassification(Classification.BAUGEWERBE)));
+     //   log.info(String.valueOf(this.vendorService.getIncomeForClassification(Classification.BAUGEWERBE)));
 
+        log.info("----test: ----");
 
+        System.out.println(" differenz ------------     "+ vendorService.compareIncome(LocalDate.of(2020, 03, 01), LocalDate.of(2020, 03, 31), LocalDate.of(2020, 04, 01), LocalDate.of(2020, 04, 30)));
+        //vendorService.compareIncome(LocalDate.of(2020, 03, 01), LocalDate.of(2020, 03, 31), LocalDate.of(2020, 04, 01), LocalDate.of(2020, 04, 30));
+     //   log.info(String.valueOf(this.vendorRepository.findCreditcardtransactionsByvUuid(v6.getVUuid())));
+       // System.out.println("TEST: "+ vendorRepository.findCreditcardtransactionsByvUuid(v6.getVUuid()));
+      //  vendorService.ausgabe(v6.getVUuid());
 
-     //   log.info("--------- Get fees for startup - funktioniert!!!: -----------");
-       // log.info(String.valueOf(vendorService.getTransactionFeeForStartup(LocalDate.of(2020, 03, 01), LocalDate.of(2020, 03, 31))));
+        log.info("--------- Get fees for startup - funktioniert!!!: -----------");
+        log.info(String.valueOf(vendorService.getTransactionFeeForStartup(LocalDate.of(2020, 03, 01), LocalDate.of(2020, 03, 31))));
     }
 }

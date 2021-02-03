@@ -9,9 +9,9 @@ import webuildit.myStartup.repository.TransactionRepository;
 import webuildit.myStartup.repository.VendorRepository;
 
 import java.time.LocalDate;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
+import java.time.ZoneId;
+import java.util.*;
+
 @Service
 public class VendorServiceImpl implements VendorService {
     TransactionRepository transactionRepository;
@@ -43,6 +43,7 @@ public class VendorServiceImpl implements VendorService {
 
     // Methode, die per abgeleiteter Datenbankabfrage alle Transaktionen eines Monats abruft
     // und diese dann mit der Transaktionsfee verrechnet, sodass die Einnahmen des Startups ausgegeben werden
+    // CHECK IF STATUS = TRUE !!!!!!!!!!!!!!
     public Double getTransactionFeeForStartup(LocalDate start, LocalDate end){
         double sum = 0;
         double fee = 0;
@@ -55,11 +56,84 @@ public class VendorServiceImpl implements VendorService {
     }
 
 
+    // Methode, die die Einnahmen des aktuellen Monats mit den Einnahmen des vorigen Monats vergleicht
+    public Double compareIncome(LocalDate m1start, LocalDate m1end, LocalDate m2start, LocalDate m2end){
+        double sum1 = 0;
+        double sum2 = 0;
+        double income1 = 0;
+        double income2 = 0;
+        double differenz = 0;
+        LocalDate currentDate = Calendar.getInstance().getTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        List<Creditcardtransaction> cctInMonthOne = this.transactionRepository.findByTdateGreaterThanAndTdateLessThan(m1start, m1end);
+        List<Creditcardtransaction> cctInMonth2 = this.transactionRepository.findByTdateGreaterThanAndTdateLessThan(m2start, m2end);
+        // check, if current Monat:
+        System.out.println("current Month "+currentDate.getMonth());
+        System.out.println("m1 Month: "+m2start.getMonth());
+        System.out.println("currentYear: "+currentDate.getYear());
+        System.out.println("m1Year: "+m2start.getYear());
+        if(currentDate.getMonth().equals(m2start.getMonth()) && currentDate.getYear() == m2start.getYear()){
+            // berechne Income Monat 1 bis aktueller Tag
+            // das hier testen!!!!!!!
+              System.out.println("Tag: "+currentDate.getDayOfMonth());
+            for (int i = 0; i <  currentDate.getDayOfMonth(); i++){
+                // check if status is true, also Transaktion durchgeführt
+                System.out.println("status: :(");
+                System.out.println("Innerhalb for-Schleife");
 
+                if(cctInMonthOne.get(i).isStatus()){
+                    System.out.println("status true");
+                    System.out.println("Test: "+cctInMonthOne.get(i).getSum());
+                    sum1 = sum1 + cctInMonthOne.get(i).getSum();
+                    System.out.println(sum1);
+                }
+            }
+            System.out.println("sum1: "+sum1);
+            income1 = sum1 *0.02;
+            System.out.println("this month income1: "+income1);
+
+            // berechne Income Monat 2 bis aktueller Tag
+            for (int i = 0; i < currentDate.getDayOfMonth(); i++){
+                if(cctInMonth2.get(i).isStatus()){
+                    sum2 = sum2 + cctInMonth2.get(i).getSum();
+                }
+            }
+            income2 = sum2 *0.02;
+            System.out.println("this month income2: "+income2);
+
+            // Different Monat 1 zu Monat 2
+            differenz = income2 - income1;
+        }else{
+            // berechne Income Monat 1
+            for (int i = 0; i < cctInMonthOne.size(); i++){
+                if(cctInMonthOne.get(i).isStatus()){
+                    sum1 = sum1 + cctInMonthOne.get(i).getSum();
+                }
+            }
+            income1 = sum1 *0.02;
+            System.out.println("random Month income1 "+income1);
+
+            // berechne Income Monat 2
+            for (int i = 0; i < cctInMonth2.size(); i++){
+                if(cctInMonth2.get(i).isStatus()){
+                    sum2 = sum2 + cctInMonth2.get(i).getSum();
+                }
+            }
+            income2 = sum2 *0.02;
+            System.out.println("randoom Month income2 "+income2);
+
+            // Different Monat 1 zu Monat 2
+             differenz = income2 - income1;
+        }
+        return differenz;
+    }
+
+
+    // brauchen wir das?
     public List<Creditcardtransaction> getCreditcardtransactionsByUuid(UUID tUuid){
         return this.transactionRepository.findBytUuid(tUuid);
-      //    return this.transactionRepository.findByVendorUuid(vendorUuid);
     }
+
+    // was machen wir hier??
     @Override
     public Double getTransactionFee(){
         double sum = 0;
@@ -73,12 +147,15 @@ public class VendorServiceImpl implements VendorService {
     }
 
     // berechnet den Gesamtumsatz für ein Gewerbe
+    // CHECK IF STATUS = TRUE!!!!!!!!!!!
     public Double getIncomeForClassification(Classification classification){
         List<Vendor> vByClass = this.vendorRepository.findByClassification(classification);
         double sumIncome=0;
         for (int i = 0; i < vByClass.size(); i++){
             for(int j=0; i< vByClass.get(i).getTransactions().size(); j++){
-                sumIncome= vByClass.get(i).getTransactions().get(j).getSum();
+                if(vByClass.get(i).getTransactions().get(j).isStatus()) {
+                    sumIncome = sumIncome + vByClass.get(i).getTransactions().get(j).getSum();
+                }
             }
         }
         return sumIncome;
@@ -88,6 +165,22 @@ public class VendorServiceImpl implements VendorService {
     public List<Vendor> findByClassification(Classification classification){
         return this.findByClassification(classification);
     }
+
+//    //VERSUCH alle Transaktionen für einen Vendor ausgeben
+//    public List<Vendor> findCreditcardtransactionsByvUuid(UUID vUuid){
+//        return this.findCreditcardtransactionsByvUuid(vUuid);
+//    }
+//
+//    //
+//    public void ausgabe(UUID vUuid){
+//        List<Vendor> transactionByVendor = this.vendorRepository.findCreditcardtransactionsByvUuid(vUuid);
+//        for (int i = 0; i < transactionByVendor.size(); i++){
+//            for(int j=0; i< transactionByVendor.get(i).getTransactions().size(); j++){
+//                System.out.println(transactionByVendor.get(i).getTransactions().get(j).getSum());
+//            }
+//        }
+//    }
+
 
 
 }

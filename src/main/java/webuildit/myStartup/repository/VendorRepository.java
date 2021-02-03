@@ -12,4 +12,5 @@ import java.util.UUID;
 @Repository
 public interface VendorRepository extends JpaRepository<Vendor, UUID> {
     List<Vendor> findByClassification(Classification classification);
+   // List<Vendor>findCreditcardtransactionsByvUuid(UUID vUuid);
 }
