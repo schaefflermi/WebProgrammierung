@@ -9,6 +9,8 @@ import webuildit.myStartup.repository.TransactionRepository;
 import webuildit.myStartup.repository.VendorRepository;
 
 import java.time.LocalDate;
+import java.time.Year;
+import java.time.YearMonth;
 import java.time.ZoneId;
 import java.util.*;
 
@@ -23,7 +25,7 @@ public class VendorServiceImpl implements VendorService {
         this.vendorRepository=vendorRepository;
 
     }
-
+    //Unbenutzt
     public List<Double> getTransactionFees(UUID tUuid){
         List<Double> result = new LinkedList<>();
         List<Creditcardtransaction> tmp = this.transactionRepository.findAllCreditcardtransactionBytUuid(tUuid);
@@ -41,7 +43,7 @@ public class VendorServiceImpl implements VendorService {
 //        return this.findByTdateGreaterThanAndTdateLessThan(start, end);
 //    }
 
-    // Methode, die per abgeleiteter Datenbankabfrage alle Transaktionen eines Monats abruft
+   /* // Methode, die per abgeleiteter Datenbankabfrage alle Transaktionen eines Monats abruft
     // und diese dann mit der Transaktionsfee verrechnet, sodass die Einnahmen des Startups ausgegeben werden
     // CHECK IF STATUS = TRUE !!!!!!!!!!!!!!
     public Double getTransactionFeeForStartup(LocalDate start, LocalDate end){
@@ -53,7 +55,7 @@ public class VendorServiceImpl implements VendorService {
         }
         fee = sum *0.02;
         return fee;
-    }
+    }*/
 
 
     // Methode, die die Einnahmen des aktuellen Monats mit den Einnahmen des vorigen Monats vergleicht
@@ -138,16 +140,20 @@ public class VendorServiceImpl implements VendorService {
     public Double getTransactionFee(){
         double sum = 0;
         double fee = 0;
+        int month = YearMonth.now().getMonthValue();
+        int year = Year.now().getValue();
         List<Creditcardtransaction> cct = this.transactionRepository.findAll();
         for (int i = 0; i < cct.size(); i++){
-            sum = sum + cct.get(i).getSum();
+            if(cct.get(i).getTdate().getMonthValue() == month && cct.get(i).getTdate().getYear() == year && cct.get(i).isStatus()){
+                sum = sum + cct.get(i).getSum();
+            }
+
         }
         fee = sum *0.02;
         return fee;
     }
 
     // berechnet den Gesamtumsatz für ein Gewerbe
-    // CHECK IF STATUS = TRUE!!!!!!!!!!!
     public Double getIncomeForClassification(Classification classification){
         List<Vendor> vByClass = this.vendorRepository.findByClassification(classification);
         double sumIncome=0;
@@ -166,21 +172,35 @@ public class VendorServiceImpl implements VendorService {
         return this.findByClassification(classification);
     }
 
-//    //VERSUCH alle Transaktionen für einen Vendor ausgeben
-//    public List<Vendor> findCreditcardtransactionsByvUuid(UUID vUuid){
-//        return this.findCreditcardtransactionsByvUuid(vUuid);
-//    }
-//
-//    //
-//    public void ausgabe(UUID vUuid){
-//        List<Vendor> transactionByVendor = this.vendorRepository.findCreditcardtransactionsByvUuid(vUuid);
-//        for (int i = 0; i < transactionByVendor.size(); i++){
-//            for(int j=0; i< transactionByVendor.get(i).getTransactions().size(); j++){
-//                System.out.println(transactionByVendor.get(i).getTransactions().get(j).getSum());
-//            }
-//        }
-//    }
 
+
+    // Methode um für den aktuellen Monat anfallenden Kosten eines Verkäufers zu berechnen
+    @Override
+    public Double getCostForVendorForCurrentMonth(UUID vUuid){
+        List<Creditcardtransaction> allVendors = this.transactionRepository.findAll();;
+        List<Creditcardtransaction> oneVendor = new ArrayList<>();
+        double sum = 0;
+        int month = YearMonth.now().getMonthValue();
+        int year = Year.now().getValue();
+
+        for(int i=0; i< allVendors.size(); i++){
+            // Checkt alle Transaktionen eines Verkäufers
+            if(allVendors.get(i).getVendor().getVUuid().equals(vUuid)){
+                // Checkt auf den aktuellen Monat, Jahr und Erfolg der Transaktion
+                if(allVendors.get(i).getTdate().getMonthValue() == month && allVendors.get(i).getTdate().getYear() == year && allVendors.get(i).isStatus()){
+                    oneVendor.add(allVendors.get(i));
+                }
+            }
+        }
+
+        //Berechnet die Summe der Transaktionen
+        for (int j = 0; j < oneVendor.size(); j++){
+            sum = sum + oneVendor.get(j).getSum();
+
+        }
+        //Errechnet die Transaktionsgebühren
+        return sum * 0.02;
+    }
 
 
 }

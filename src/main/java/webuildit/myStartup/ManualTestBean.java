@@ -59,7 +59,7 @@ public class ManualTestBean {
         Vendor v4 = new Vendor( 4, "ATLAS Informationssysteme GmbH", "Carl-Reichstein-Straße 7/9 14770 Brandenburg an der Havel", Classification.DIENSTLEISTUNGEN);
         Vendor v5 = new Vendor(5, "IFB Ingenieure GmbH", "Mozartstraße 19/2, 73663 Berglen", Classification.BAUGEWERBE);
         Vendor v6 = new Vendor(6, "GOLDBECK GmbH", "Rosengartenweg 3, 67281 Kirchheim an der Weinstraße", Classification.BAUGEWERBE);
-        Creditcardtransaction c1 = new Creditcardtransaction("Peter Müller buys some cole", 189, true,  LocalDate.of(2020,11,6));
+        Creditcardtransaction c1 = new Creditcardtransaction("Peter Müller buys some cole", 189, true,  LocalDate.of(2020,02,6));
         Creditcardtransaction c2 = new Creditcardtransaction("Anja Beck buys from an agriculture company", 75, true,  LocalDate.of(2021,01,20));
         Creditcardtransaction c3 = new Creditcardtransaction("Tony Smith has a little company using SAP software and buys it in his own name", 15000, true, LocalDate.of(2021, 01, 22));
         Creditcardtransaction c4 = new Creditcardtransaction("Fogel buys some house related stuff", 1050, true, LocalDate.of(2021, 01, 02));
@@ -67,10 +67,20 @@ public class ManualTestBean {
         Creditcardtransaction c6 = new Creditcardtransaction("P Müller plans on building a home", 1500, true, LocalDate.of(2020, 03, 25));
         Creditcardtransaction c7 = new Creditcardtransaction("Beck builds a terrasse", 3000, true, LocalDate.of(2021, 02,03));
         Creditcardtransaction c8 = new Creditcardtransaction("Fogel build a garage", 1200, true, LocalDate.of(2020, 04, 03));
-        Creditcardtransaction c9 = new Creditcardtransaction("Smith bilds a home", 37058, true, LocalDate.of(2020, 03,15 ));
+        Creditcardtransaction c9 = new Creditcardtransaction("Smith bilds a home", 37058, true, LocalDate.of(2020, 02,15 ));
         Creditcardtransaction c10 = new Creditcardtransaction("A Müller buys his sister a flat", 30000, true, LocalDate.of(2020, 03, 19));
-        Creditcardtransaction c11 = new Creditcardtransaction("fail1", 50, false, LocalDate.of(2020, 03, 19));
+        Creditcardtransaction c11 = new Creditcardtransaction("fail1", 50, false, LocalDate.of(2020, 04, 19));
         Creditcardtransaction c12 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
+        Creditcardtransaction c13 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
+        Creditcardtransaction c14 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
+        Creditcardtransaction c15 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
+        Creditcardtransaction c16 = new Creditcardtransaction("fail1", 50, false, LocalDate.of(2020, 04, 19));
+        Creditcardtransaction c17 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
+        Creditcardtransaction c18 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
+        Creditcardtransaction c19 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
+        Creditcardtransaction c20 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
+
+
 
 
 // do Fehlermeldung, wenn sum > netIncome -> kunde muss zahlen können!!!
@@ -86,6 +96,17 @@ public class ManualTestBean {
         c8.setCustomer(customer_4);
         c9.setCustomer(customer_3);
         c10.setCustomer(customer_5);
+        c11.setCustomer(customer_6);
+        c12.setCustomer(customer_6);
+        c13.setCustomer(customer_6);
+        c14.setCustomer(customer_6);
+        c15.setCustomer(customer_6);
+        c16.setCustomer(customer_3);
+        c17.setCustomer(customer_3);
+        c18.setCustomer(customer_3);
+        c19.setCustomer(customer_3);
+        c20.setCustomer(customer_3);
+
         //Ordne den Transaktionen Verkäufer zu
         c1.setVendor(v1);
         c2.setVendor(v2);
@@ -97,15 +118,23 @@ public class ManualTestBean {
         c8.setVendor(v6);
         c9.setVendor(v6);
         c10.setVendor(v6);
+        c11.setVendor(v6);
+        c12.setVendor(v2);
+        c13.setVendor(v4);
+        c14.setVendor(v3);
+        c15.setVendor(v6);
+        c16.setVendor(v2);
+        c17.setVendor(v2);
+        c18.setVendor(v2);
+        c19.setVendor(v2);
+        c20.setVendor(v2);
+
 
 
         // speichere alle Transaktionen
-        this.transactionRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10));
-        List<Creditcardtransaction> cct = new ArrayList<>();
-        cct.add(c1);
-        cct.add(c2);
+        this.transactionRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15));
         // speichern wir irgendwo Kunden & Verkäufer?
-        v1.setTransactions(Arrays.asList(c1));
+        v1.setTransactions(Arrays.asList(c1, c12, c16, c17, c18, c19, c20));
         v2.setTransactions(Arrays.asList(c2));
         v3.setTransactions(Arrays.asList(c3));
         v4.setTransactions(Arrays.asList(c4));
@@ -113,52 +142,15 @@ public class ManualTestBean {
         v6.setTransactions(Arrays.asList(c6, c7, c8, c9, c10));
         this.vendorRepository.saveAll(Arrays.asList(v1,v2,v3,v4,v5,v6));
 
-        // Test: gib einen Namen aus
-       /* log.info("--------------------------------------------------1");
-        log.info(this.transactionRepository.findAll().get(1).getDescription());*/
-        /*log.info("--------------------------------------------------1");
-       // this.transactionRepository.findAll().get(1).getDescription();
-        log.info(String.valueOf(cct.get(0).getSum()));
-        log.info("--------------------------------------------------1");
-        log.info(cct.get(0).getDescription());*/
-       /* log.info("Summe wird ausgegeben");
-        log.info(String.valueOf(transactionRepository.findAll().get(0).getSum()));
-        log.info("Summe wurde ausgegeben");
-        log.info("Summe wird wiederholt ausgegeben");*/
-        //log.info(String.valueOf(transactionRepository.findAll().get(0).getSum()));
-       /* log.info("Summe wurde wiederholt ausgegeben");
-        log.info(CCTControllerImpl.getTransactionFee());
-        log.info("--------------------------------------------------1");
-        log.info(String.valueOf(cct.get(0).getSum()));
-        log.info("--------------------------------------------------1");*/
-     //   log.info(String.valueOf(vendorService.getTransactionFee()));
-        //vendorService.getTransactionFee();
-     //   CCTControllerImpl.getTransaction(c1.getTUuid());
-      //  log.info(String.valueOf(transactionRepository.findBytUuid(c1.getTUuid())));
-   //     log.info("find by v uuid:");
-        //log.info(String.valueOf(transactionRepository.findByVendorUuid(v1.getVUuid())));
-        // log.info(String.valueOf(c1.getTUuid()));
 
-       // CCTControllerImpl.getTransactionFees(v1.getVUuid());
-
-
-//        log.info(this.moneyController.getName());
-//        log.info(this.moneyController.getServiceName());
-//        log.info(this.artistService.getName());
-
-      //  log.info("------ alle ... in einer KLassifikation");
-       // log.info(String.valueOf(this.vendorService.findByClassification(Classification.BAUGEWERBE)));
-     //   log.info(String.valueOf(this.vendorService.getIncomeForClassification(Classification.BAUGEWERBE)));
 
         log.info("----test: ----");
 
         System.out.println(" differenz ------------     "+ vendorService.compareIncome(LocalDate.of(2020, 03, 01), LocalDate.of(2020, 03, 31), LocalDate.of(2020, 04, 01), LocalDate.of(2020, 04, 30)));
-        //vendorService.compareIncome(LocalDate.of(2020, 03, 01), LocalDate.of(2020, 03, 31), LocalDate.of(2020, 04, 01), LocalDate.of(2020, 04, 30));
-     //   log.info(String.valueOf(this.vendorRepository.findCreditcardtransactionsByvUuid(v6.getVUuid())));
-       // System.out.println("TEST: "+ vendorRepository.findCreditcardtransactionsByvUuid(v6.getVUuid()));
-      //  vendorService.ausgabe(v6.getVUuid());
+
 
         log.info("--------- Get fees for startup - funktioniert!!!: -----------");
-        log.info(String.valueOf(vendorService.getTransactionFeeForStartup(LocalDate.of(2020, 03, 01), LocalDate.of(2020, 03, 31))));
+        log.info(String.valueOf(vendorService.getTransactionFee()));
+        System.out.println("Summe für einen Monat: "+vendorService.getCostForVendorForCurrentMonth(v6.getVUuid()));
     }
 }

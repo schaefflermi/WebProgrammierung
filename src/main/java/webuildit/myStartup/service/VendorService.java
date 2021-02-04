@@ -11,9 +11,10 @@ import java.util.UUID;
 public interface VendorService {
     List<Creditcardtransaction> getAllCreditcardtransactions(UUID tUuid);
     Double getTransactionFee();
-    Double getTransactionFeeForStartup(LocalDate start, LocalDate end);
+   // Double getTransactionFeeForStartup(LocalDate start, LocalDate end);
     List<Vendor> findByClassification(Classification classification);
     Double getIncomeForClassification(Classification classification);
    // void ausgabe(UUID vUuid);
    Double compareIncome(LocalDate m1start, LocalDate m1end, LocalDate m2start, LocalDate m2end);
+   Double getCostForVendorForCurrentMonth(UUID vUuid);
 }
