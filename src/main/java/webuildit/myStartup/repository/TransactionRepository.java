@@ -11,15 +11,22 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+import static org.hibernate.loader.Loader.SELECT;
+
+
 @Repository
 public interface TransactionRepository extends JpaRepository<Creditcardtransaction, UUID> {
    // List<TransactionRepository> findByCNameContaining(String substring);
     List<Creditcardtransaction> findAllCreditcardtransactionBytUuid(UUID tUuid);
     List<Creditcardtransaction> findBytUuid(UUID tUuid);
     List<Creditcardtransaction> findByTdateGreaterThanAndTdateLessThan(LocalDate start, LocalDate end);
-   /* @Query("SELECT distinct CUSTOMER_ID FROM CREDITCARDTRANSACTION where status = false and (select count(status) from CREDITCARDTRANSACTION where status = false) > 5")
-    List<Creditcardtransaction> findAllCreditcradtransactions();
-*/
-   // List<Creditcardtransaction> findByVendorUuid(UUID vendorUuid);
+  /* @Query("SELECT distinct c FROM Creditcardtransaction c  where  c.status = false and 4 < " +
+           "(select count(status) from Creditcardtransaction where status = false)")*/
+  @Query("SELECT distinct c FROM Creditcardtransaction c  where  c.status = false ")
+    List<Creditcardtransaction> findDistinctByStatus(Boolean status);
+
+    @Query("SELECT distinct c FROM Creditcardtransaction c  where  c.status = false ")
+    List<Creditcardtransaction> findDistinctByCustomer();
+
 
 }

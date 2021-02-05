@@ -2,6 +2,7 @@ package webuildit.myStartup.service;
 
 import webuildit.myStartup.model.Classification;
 import webuildit.myStartup.model.Creditcardtransaction;
+import webuildit.myStartup.model.Customer;
 import webuildit.myStartup.model.Vendor;
 
 import java.time.LocalDate;
@@ -17,4 +18,6 @@ public interface VendorService {
    // void ausgabe(UUID vUuid);
    Double compareIncome(LocalDate m1start, LocalDate m1end, LocalDate m2start, LocalDate m2end);
    Double getCostForVendorForCurrentMonth(UUID vUuid);
+   void findDistinctByStatus(Boolean status);
+   List<Customer> findAllWhereStatusFalse2();
 }

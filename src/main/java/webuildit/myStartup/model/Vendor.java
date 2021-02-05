@@ -21,6 +21,7 @@ public class Vendor {
    //private long vId;
     private String vName;
     private String vAddress;
+    @Enumerated(EnumType.STRING)
     private Classification classification;
 
 

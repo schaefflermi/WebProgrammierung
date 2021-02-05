@@ -1,10 +1,13 @@
 package webuildit.myStartup.service;
 
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import webuildit.myStartup.model.Classification;
 import webuildit.myStartup.model.Creditcardtransaction;
+import webuildit.myStartup.model.Customer;
 import webuildit.myStartup.model.Vendor;
+import webuildit.myStartup.repository.CustomerRepository;
 import webuildit.myStartup.repository.TransactionRepository;
 import webuildit.myStartup.repository.VendorRepository;
 
@@ -18,11 +21,13 @@ import java.util.*;
 public class VendorServiceImpl implements VendorService {
     TransactionRepository transactionRepository;
     VendorRepository vendorRepository;
+    CustomerRepository customerRepository;
 
     @Autowired
-    public VendorServiceImpl(TransactionRepository transactionRepository, VendorRepository vendorRepository){
+    public VendorServiceImpl(TransactionRepository transactionRepository, VendorRepository vendorRepository, CustomerRepository customerRepository){
         this.transactionRepository = transactionRepository;
         this.vendorRepository=vendorRepository;
+        this.customerRepository=customerRepository;
 
     }
     //Unbenutzt
@@ -200,6 +205,55 @@ public class VendorServiceImpl implements VendorService {
         }
         //Errechnet die Transaktionsgebühren
         return sum * 0.02;
+    }
+    //Funktionsfähig
+    //Gibt alle Kunden aus welche im Monat 5 erfolglose Transaktionen hatten
+    //Es fehlt noch die implementierung des Parameters für den Monat
+    @Override
+    public void findDistinctByStatus(Boolean status){
+        List<Creditcardtransaction> cct = transactionRepository.findDistinctByStatus(status);
+
+        //Entfernt alles, was nicht mindestens 5 mal vorkommt
+        for(int i = 0; i < cct.size(); i++) {
+            for(int j = 0; j < cct.size(); j++){
+                int sum = 0;
+             if(cct.get(i).getCustomer().getCUuid().equals(cct.get(j).getCustomer().getCUuid())){
+                 sum++;
+             }
+             if(sum < 4){
+                 cct.remove(i);
+             }
+            }
+        }
+        //Entfernt doppelte Beiträge
+        for(int i = 0; i < cct.size(); i++){
+            //verhindert das die beiden Variablen den gleichen Wert haben, ansonsten wird jeder eintrag entfernt
+            int j = i+1;
+            for(;j < cct.size(); j++){
+                if(cct.get(i).getCustomer().getCUuid().equals(cct.get(j).getCustomer().getCUuid())){
+                    cct.remove(j);
+                }
+            };
+
+        }
+        for (int i = 0; i < cct.size(); i++){
+            System.out.println(cct.get(i).getCustomer().getCUuid());
+        }
+
+    }
+    /*@Override
+    public List<City> findByNameEndsWith(String name) {
+
+        var cities = (List<City>) repository.findByNameEndsWith(name);
+        return cities;
+    }*/
+
+
+
+    @Override
+    public List<Customer> findAllWhereStatusFalse2() {
+        var customer = (List<Customer>) customerRepository.findAllWhereStatusFalse2();
+        return customer;
     }
 
 

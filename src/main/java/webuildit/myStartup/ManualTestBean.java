@@ -3,6 +3,7 @@ package webuildit.myStartup;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import webuildit.myStartup.controller.CCTController;
 import webuildit.myStartup.controller.CCTControllerImpl;
@@ -10,6 +11,7 @@ import webuildit.myStartup.model.Classification;
 import webuildit.myStartup.model.Creditcardtransaction;
 import webuildit.myStartup.model.Customer;
 import webuildit.myStartup.model.Vendor;
+import webuildit.myStartup.repository.CustomerRepository;
 import webuildit.myStartup.repository.TransactionRepository;
 import webuildit.myStartup.repository.VendorRepository;
 import webuildit.myStartup.service.VendorService;
@@ -32,13 +34,15 @@ public class ManualTestBean {
     TransactionRepository transactionRepository;
     VendorRepository vendorRepository;
     VendorService vendorService;
+    CustomerRepository customerRepository;
 
 
-    ManualTestBean(CCTControllerImpl CCTControllerImpl, TransactionRepository transactionRepository, VendorRepository vendorRepository, VendorService vendorService){
+    ManualTestBean(CCTControllerImpl CCTControllerImpl, TransactionRepository transactionRepository, VendorRepository vendorRepository, VendorService vendorService, CustomerRepository customerRepository){
         this.CCTControllerImpl = CCTControllerImpl;
-        this.transactionRepository=transactionRepository;
-        this.vendorRepository=vendorRepository;
-        this.vendorService=vendorService;
+        this.transactionRepository = transactionRepository;
+        this.vendorRepository = vendorRepository;
+        this.vendorService = vendorService;
+        this.customerRepository = customerRepository;
 
 
     }
@@ -79,6 +83,7 @@ public class ManualTestBean {
         Creditcardtransaction c18 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
         Creditcardtransaction c19 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
         Creditcardtransaction c20 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
+        Creditcardtransaction c21 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
 
 
 
@@ -106,6 +111,7 @@ public class ManualTestBean {
         c18.setCustomer(customer_3);
         c19.setCustomer(customer_3);
         c20.setCustomer(customer_3);
+        c21.setCustomer(customer_1);
 
         //Ordne den Transaktionen Verkäufer zu
         c1.setVendor(v1);
@@ -128,20 +134,29 @@ public class ManualTestBean {
         c18.setVendor(v2);
         c19.setVendor(v2);
         c20.setVendor(v2);
+        c21.setVendor(v1);
 
 
 
         // speichere alle Transaktionen
         this.transactionRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15));
         // speichern wir irgendwo Kunden & Verkäufer?
-        v1.setTransactions(Arrays.asList(c1, c12, c16, c17, c18, c19, c20));
-        v2.setTransactions(Arrays.asList(c2));
+        v1.setTransactions(Arrays.asList(c1, c12, c21));
+        v2.setTransactions(Arrays.asList(c2,c16, c17, c18, c19, c20));
         v3.setTransactions(Arrays.asList(c3));
         v4.setTransactions(Arrays.asList(c4));
         v5.setTransactions(Arrays.asList(c5));
         v6.setTransactions(Arrays.asList(c6, c7, c8, c9, c10));
         this.vendorRepository.saveAll(Arrays.asList(v1,v2,v3,v4,v5,v6));
 
+        //Ordne den Kunden Transaktionen zu
+        customer_1.setTransactions(Arrays.asList(c1, c6, c21));
+        customer_2.setTransactions(Arrays.asList(c2, c7));
+        customer_3.setTransactions(Arrays.asList(c3, c9, c16, c17, c18, c19, c20));
+        customer_4.setTransactions(Arrays.asList(c4, c8));
+        customer_5.setTransactions(Arrays.asList(c5, c10));
+        customer_6.setTransactions(Arrays.asList(c11, c12, c13, c14, c15));
+        this.customerRepository.saveAll(Arrays.asList(customer_1, customer_2, customer_3, customer_4,customer_5, customer_6));
 
 
         log.info("----test: ----");
@@ -152,5 +167,14 @@ public class ManualTestBean {
         log.info("--------- Get fees for startup - funktioniert!!!: -----------");
         log.info(String.valueOf(vendorService.getTransactionFee()));
         System.out.println("Summe für einen Monat: "+vendorService.getCostForVendorForCurrentMonth(v6.getVUuid()));
+        vendorService.findDistinctByStatus(false);
+        log.info("--------------------");
+        /*transactionRepository.findDistinctByCustomer().
+        forEach(Creditcardtransaction->log.info((""+Creditcardtransaction.getCustomer().getCUuid())));*/
+       /* customerRepository.findDistinctBycUuid().forEach(Customer->log.info(String.valueOf(Customer.getCUuid())));*/
+        /*vendorService.findDistinctByStatus(false);*/
+       /* transactionRepository.findAll();*/
+        /*vendorService.findAllWhereStatusFalse().forEach(creditcardtransaction->log.info(""+creditcardtransaction.getCustomer().getCUuid()));*/
+        vendorService.findAllWhereStatusFalse2().forEach(Customer->log.info(String.valueOf(Customer.getCUuid())));
     }
 }
