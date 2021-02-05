@@ -175,6 +175,6 @@ public class ManualTestBean {
         /*vendorService.findDistinctByStatus(false);*/
        /* transactionRepository.findAll();*/
         /*vendorService.findAllWhereStatusFalse().forEach(creditcardtransaction->log.info(""+creditcardtransaction.getCustomer().getCUuid()));*/
-        vendorService.findAllWhereStatusFalse2().forEach(Customer->log.info(String.valueOf(Customer.getCUuid())));
+        vendorService.findAllCustomerWithFiveFailedTransaction().forEach(Customer->log.info(String.valueOf(Customer.getCUuid())));
     }
 }

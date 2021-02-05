@@ -19,5 +19,5 @@ public interface VendorService {
    Double compareIncome(LocalDate m1start, LocalDate m1end, LocalDate m2start, LocalDate m2end);
    Double getCostForVendorForCurrentMonth(UUID vUuid);
    void findDistinctByStatus(Boolean status);
-   List<Customer> findAllWhereStatusFalse2();
+   List<Customer> findAllCustomerWithFiveFailedTransaction();
 }

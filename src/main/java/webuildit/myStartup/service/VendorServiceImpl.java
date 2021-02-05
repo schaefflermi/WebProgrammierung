@@ -251,8 +251,8 @@ public class VendorServiceImpl implements VendorService {
 
 
     @Override
-    public List<Customer> findAllWhereStatusFalse2() {
-        var customer = (List<Customer>) customerRepository.findAllWhereStatusFalse2();
+    public List<Customer> findAllCustomerWithFiveFailedTransaction() {
+        var customer = (List<Customer>) customerRepository.findAllCustomerWithFiveFailedTransaction();
         return customer;
     }
 
