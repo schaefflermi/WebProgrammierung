@@ -28,7 +28,7 @@ import java.util.UUID;
 public class ManualTestBean {
 
     // Vorsicht diese Klasse ist nur für Übungszwecke,
-    // sie sollte nie in einer produktiven Applikation sein
+    // sie sollte nie in einer produktiven Applikation sein.
 
     CCTControllerImpl CCTControllerImpl;
     TransactionRepository transactionRepository;
