@@ -186,13 +186,29 @@ public class ManualTestBean {
       //  transactionRepository.getByYearandMonth(2021,2).forEach(Creditcardtransaction->log.info(Creditcardtransaction.getDescription()));
        // transactionRepository.findAllByVendor_id(v6.getVUuid()).forEach(Creditcardtransaction-> double sum = sum + Creditcardtransaction.getSum());
 
-        /*log.info(String.valueOf(vendorService.findAllByVendorandCurrentMonth(v6.getVUuid())));
-        transactionRepository.findAllByVendorandCurrentMonth(2).forEach(Creditcardtransaction->log.info(Creditcardtransaction.getDescription()));
-        log.info(String.valueOf(vendorService.findAllByVendorandCurrentMonth(2)));
-        vendorRepository.findAllDistinctByClassification().forEach(Vendor->log.info(String.valueOf(Vendor.getClassification())));*/
-        /*final double[] sum = {0};
-        transactionRepository.findAllByVendorandCurrentMonth(v6.getVUuid()).forEach(Creditcardtransaction-> sum[0] = sum[0] + Creditcardtransaction.getSum());
-        log.info(String.valueOf(sum[0]));*/
-        log.info(String.valueOf(transactionRepository.findAllByVendorandCurrentMonth(v6.getVUuid())));
-            }
+        //      vendorRepository.findAllDistinctByClassification().forEach(Vendor->log.info(String.valueOf(Vendor.getVUuid())));
+        //    vendorRepository.findAllDistinctByClassification().forEach(Vendor->log.info(String.valueOf(Vendor.getClassification())));
+
+
+
+
+
+
+        // Aufgabe 1.4: alle Kunden mit mindestens 5 erfolglosen Transaktionen im gewählten Monat (z.B. 01 2021)
+        vendorService.findDistinctByStatus(01, 2021);
+
+        // Aufgabe 1.5: Differenz zwischen eingegebenen Monat & vorigem Monat -> testen !!!!!!
+        vendorService.compareIncome(02, 2021);
+
+
+
+
+
+        // Aufgabe 1.1: abzurechnenden Betrag für den aktuellen Monat:
+       log.info("abzurechnender Betrag für den aktuellen Monat, Parameter vUuid: "+ String.valueOf(transactionRepository.findAllByVendorandCurrentMonth(v6.getVUuid())));
+
+        // Aufgabe 1.2: gibt aktuellen Einnahmen des Startups für übergebenen Monat zurück:
+               log.info("Einnahmen des Startups in Monat, Parameter Monat, Jahr: "+String.valueOf(transactionRepository.findAllTransactionsByMonth(2, 2021)));
+
+    }
 }
