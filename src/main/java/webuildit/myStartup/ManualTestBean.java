@@ -63,7 +63,7 @@ public class ManualTestBean {
         Vendor v4 = new Vendor( 4, "ATLAS Informationssysteme GmbH", "Carl-Reichstein-Straße 7/9 14770 Brandenburg an der Havel", Classification.DIENSTLEISTUNGEN);
         Vendor v5 = new Vendor(5, "IFB Ingenieure GmbH", "Mozartstraße 19/2, 73663 Berglen", Classification.BAUGEWERBE);
         Vendor v6 = new Vendor(6, "GOLDBECK GmbH", "Rosengartenweg 3, 67281 Kirchheim an der Weinstraße", Classification.BAUGEWERBE);
-        Creditcardtransaction c1 = new Creditcardtransaction("Peter Müller buys some cole", 189, true,  LocalDate.of(2020,02,6));
+        Creditcardtransaction c1 = new Creditcardtransaction("Peter Müller buys some cole", 189, true,  LocalDate.of(2021,02,6));
         Creditcardtransaction c2 = new Creditcardtransaction("Anja Beck buys from an agriculture company", 75, true,  LocalDate.of(2021,01,20));
         Creditcardtransaction c3 = new Creditcardtransaction("Tony Smith has a little company using SAP software and buys it in his own name", 15000, true, LocalDate.of(2021, 01, 22));
         Creditcardtransaction c4 = new Creditcardtransaction("Fogel buys some house related stuff", 1050, true, LocalDate.of(2021, 01, 02));
@@ -80,10 +80,11 @@ public class ManualTestBean {
         Creditcardtransaction c15 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
         Creditcardtransaction c16 = new Creditcardtransaction("fail1", 50, false, LocalDate.of(2020, 04, 19));
         Creditcardtransaction c17 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
-        Creditcardtransaction c18 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
-        Creditcardtransaction c19 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
+        Creditcardtransaction c18 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 02, 24));
+        Creditcardtransaction c19 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 02, 24));
         Creditcardtransaction c20 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
         Creditcardtransaction c21 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
+        Creditcardtransaction c22 = new Creditcardtransaction("Beck builds a terrasse", 3000, true, LocalDate.of(2021, 02,03));
 
 
 
@@ -112,6 +113,7 @@ public class ManualTestBean {
         c19.setCustomer(customer_3);
         c20.setCustomer(customer_3);
         c21.setCustomer(customer_1);
+        c22.setCustomer(customer_2);
 
         //Ordne den Transaktionen Verkäufer zu
         c1.setVendor(v1);
@@ -135,6 +137,7 @@ public class ManualTestBean {
         c19.setVendor(v2);
         c20.setVendor(v2);
         c21.setVendor(v1);
+        c22.setVendor(v6);
 
 
 
@@ -146,12 +149,12 @@ public class ManualTestBean {
         v3.setTransactions(Arrays.asList(c3));
         v4.setTransactions(Arrays.asList(c4));
         v5.setTransactions(Arrays.asList(c5));
-        v6.setTransactions(Arrays.asList(c6, c7, c8, c9, c10));
+        v6.setTransactions(Arrays.asList(c6, c7, c8, c9, c10, c22));
         this.vendorRepository.saveAll(Arrays.asList(v1,v2,v3,v4,v5,v6));
 
         //Ordne den Kunden Transaktionen zu
         customer_1.setTransactions(Arrays.asList(c1, c6, c21));
-        customer_2.setTransactions(Arrays.asList(c2, c7));
+        customer_2.setTransactions(Arrays.asList(c2, c7, c22));
         customer_3.setTransactions(Arrays.asList(c3, c9, c16, c17, c18, c19, c20));
         customer_4.setTransactions(Arrays.asList(c4, c8));
         customer_5.setTransactions(Arrays.asList(c5, c10));
@@ -164,17 +167,28 @@ public class ManualTestBean {
         System.out.println(" differenz ------------     "+ vendorService.compareIncome(LocalDate.of(2020, 03, 01), LocalDate.of(2020, 03, 31), LocalDate.of(2020, 04, 01), LocalDate.of(2020, 04, 30)));
 
 
-        log.info("--------- Get fees for startup - funktioniert!!!: -----------");
+        /*log.info("--------- Get fees for startup - funktioniert!!!: -----------");
         log.info(String.valueOf(vendorService.getTransactionFee()));
         System.out.println("Summe für einen Monat: "+vendorService.getCostForVendorForCurrentMonth(v6.getVUuid()));
         vendorService.findDistinctByStatus(false);
-        log.info("--------------------");
+        log.info("--------------------");*/
         /*transactionRepository.findDistinctByCustomer().
         forEach(Creditcardtransaction->log.info((""+Creditcardtransaction.getCustomer().getCUuid())));*/
        /* customerRepository.findDistinctBycUuid().forEach(Customer->log.info(String.valueOf(Customer.getCUuid())));*/
         /*vendorService.findDistinctByStatus(false);*/
        /* transactionRepository.findAll();*/
         /*vendorService.findAllWhereStatusFalse().forEach(creditcardtransaction->log.info(""+creditcardtransaction.getCustomer().getCUuid()));*/
-        vendorService.findAllCustomerWithFiveFailedTransaction().forEach(Customer->log.info(String.valueOf(Customer.getCUuid())));
-    }
+        /*vendorService.findAllCustomerWithFiveFailedTransaction().forEach(Customer->log.info(String.valueOf(Customer.getCUuid())));
+        log.info("--------------------");*/
+       // vendorService.findAllByTdateMonth(2).forEach(Creditcardtransaction->log.info(String.valueOf(Creditcardtransaction.getTdate())));
+        log.info("--------------------");
+       // transactionRepository.findAllByTdate_Month("February").forEach(Creditcardtransaction->log.info(String.valueOf(Creditcardtransaction.getTdate())));
+      //  transactionRepository.getByYearandMonth(2021,2).forEach(Creditcardtransaction->log.info(Creditcardtransaction.getDescription()));
+       // transactionRepository.findAllByVendor_id(v6.getVUuid()).forEach(Creditcardtransaction-> double sum = sum + Creditcardtransaction.getSum());
+
+        log.info(String.valueOf(vendorService.findAllByVendorandCurrentMonth(v6.getVUuid())));
+        transactionRepository.findAllByVendorandCurrentMonth(2).forEach(Creditcardtransaction->log.info(Creditcardtransaction.getDescription()));
+        log.info(String.valueOf(vendorService.findAllByVendorandCurrentMonth(2)));
+        vendorRepository.findAllDistinctByClassification().forEach(Vendor->log.info(String.valueOf(Vendor.getClassification())));
+            }
 }

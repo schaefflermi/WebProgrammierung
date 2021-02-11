@@ -256,5 +256,39 @@ public class VendorServiceImpl implements VendorService {
         return customer;
     }
 
+    @Override
+    public List<Creditcardtransaction> findAllByTdateLikeAndVendor(LocalDate date, UUID vUuid) {
+        var cct = (List<Creditcardtransaction>) transactionRepository.findAllByTdateLikeAndVendor(date, vUuid);
+        return null;
+    }
+    // Aufgabe 1: Bei Eingabe der Id eines Verkäufers, der abzurechnende Betrag für diesen für den aktuellen Monat zurückgegeben wird.
+    @Override
+    public double findAllByVendorandCurrentMonth(UUID vUuid) {
+        var cct = (List<Creditcardtransaction>) transactionRepository.findAllByVendorandCurrentMonth(vUuid);
+        double sum = 0;
+        for(int i = 0; i < cct.size(); i++){
+            sum = sum + cct.get(i).getSum();
+        }
+        return sum*0.02;
+    }
+
+    @Override
+    public double findAllByVendorandCurrentMonth(int month) {
+        double sum = 0;
+        var cct = (List<Creditcardtransaction>) transactionRepository.findAllByVendorandCurrentMonth(month);
+       for(int i = 0; i < cct.size(); i++){
+            sum = sum + cct.get(i).getSum();
+        }
+        return sum * 0.02;
+    }
+
+
+
+    /*@Override
+    public List<Creditcardtransaction> findAllByTdateMonth(int date) {
+        var cct = (List<Creditcardtransaction>) transactionRepository.findAllByTdateMonth(date);
+        return cct;*/
+    //}
+
 
 }
