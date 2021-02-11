@@ -35,8 +35,8 @@ public interface TransactionRepository extends JpaRepository<Creditcardtransacti
     List<Creditcardtransaction> getByYearandMonth(int year, int month);
   //Aufagbe 1 :Bei Eingabe der Id eines Verkäufers, der abzurechnende Betrag für diesen für den aktuellen Monat zurückgegeben wird.
     //Nochmal überprüfen bei daten status = false.... kam zu einem Fehler
-    @Query("Select c from Creditcardtransaction c where year(c.tdate) = year(CURRENT_DATE) AND month(c.tdate) = month(CURRENT_DATE) and c.status=true and c.vendor.vUuid = ?1")
-    List<Creditcardtransaction> findAllByVendorandCurrentMonth(UUID vUuid);
+    @Query("Select SUM(c.sum) *0.02 from Creditcardtransaction c where year(c.tdate) = year(CURRENT_DATE) AND month(c.tdate) = month(CURRENT_DATE) and c.status=true and c.vendor.vUuid = ?1")
+    List<Double> findAllByVendorandCurrentMonth(UUID vUuid);
 
     //aufgabe 1: die aktuellen Einnahmen des StartUps für diesen Monat zurückgibt
     @Query("Select c from Creditcardtransaction c where month(c.tdate) = :param1 and c.status=true")

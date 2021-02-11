@@ -164,7 +164,7 @@ public class ManualTestBean {
 
         log.info("----test: ----");
 
-        System.out.println(" differenz ------------     "+ vendorService.compareIncome(LocalDate.of(2020, 03, 01), LocalDate.of(2020, 03, 31), LocalDate.of(2020, 04, 01), LocalDate.of(2020, 04, 30)));
+     //   System.out.println(" differenz ------------     "+ vendorService.compareIncome(LocalDate.of(2020, 03, 01), LocalDate.of(2020, 03, 31), LocalDate.of(2020, 04, 01), LocalDate.of(2020, 04, 30)));
 
 
         /*log.info("--------- Get fees for startup - funktioniert!!!: -----------");
@@ -186,9 +186,13 @@ public class ManualTestBean {
       //  transactionRepository.getByYearandMonth(2021,2).forEach(Creditcardtransaction->log.info(Creditcardtransaction.getDescription()));
        // transactionRepository.findAllByVendor_id(v6.getVUuid()).forEach(Creditcardtransaction-> double sum = sum + Creditcardtransaction.getSum());
 
-        log.info(String.valueOf(vendorService.findAllByVendorandCurrentMonth(v6.getVUuid())));
+        /*log.info(String.valueOf(vendorService.findAllByVendorandCurrentMonth(v6.getVUuid())));
         transactionRepository.findAllByVendorandCurrentMonth(2).forEach(Creditcardtransaction->log.info(Creditcardtransaction.getDescription()));
         log.info(String.valueOf(vendorService.findAllByVendorandCurrentMonth(2)));
-        vendorRepository.findAllDistinctByClassification().forEach(Vendor->log.info(String.valueOf(Vendor.getClassification())));
+        vendorRepository.findAllDistinctByClassification().forEach(Vendor->log.info(String.valueOf(Vendor.getClassification())));*/
+        /*final double[] sum = {0};
+        transactionRepository.findAllByVendorandCurrentMonth(v6.getVUuid()).forEach(Creditcardtransaction-> sum[0] = sum[0] + Creditcardtransaction.getSum());
+        log.info(String.valueOf(sum[0]));*/
+        log.info(String.valueOf(transactionRepository.findAllByVendorandCurrentMonth(v6.getVUuid())));
             }
 }

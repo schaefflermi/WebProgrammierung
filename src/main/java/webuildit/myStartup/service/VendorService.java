@@ -23,6 +23,6 @@ public interface VendorService {
    List<Creditcardtransaction> findAllByTdateLikeAndVendor(LocalDate date, UUID vUuid);
   // List<Creditcardtransaction> findAllByTdateMonth(int date);
   // Aufgabe 1: Bei Eingabe der Id eines Verkäufers, der abzurechnende Betrag für diesen für den aktuellen Monat zurückgegeben wird.
-    double findAllByVendorandCurrentMonth(UUID vUuid);
+   // double findAllByVendorandCurrentMonth(UUID vUuid);
     double findAllByVendorandCurrentMonth(int month);
 }

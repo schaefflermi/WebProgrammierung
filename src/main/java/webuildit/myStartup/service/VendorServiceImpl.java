@@ -262,7 +262,7 @@ public class VendorServiceImpl implements VendorService {
         return null;
     }
     // Aufgabe 1: Bei Eingabe der Id eines Verkäufers, der abzurechnende Betrag für diesen für den aktuellen Monat zurückgegeben wird.
-    @Override
+    /*@Override
     public double findAllByVendorandCurrentMonth(UUID vUuid) {
         var cct = (List<Creditcardtransaction>) transactionRepository.findAllByVendorandCurrentMonth(vUuid);
         double sum = 0;
@@ -270,7 +270,7 @@ public class VendorServiceImpl implements VendorService {
             sum = sum + cct.get(i).getSum();
         }
         return sum*0.02;
-    }
+    }*/
 
     @Override
     public double findAllByVendorandCurrentMonth(int month) {
