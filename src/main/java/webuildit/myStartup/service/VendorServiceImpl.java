@@ -66,66 +66,35 @@ public class VendorServiceImpl implements VendorService {
     // Methode, die die Einnahmen des aktuellen Monats mit den Einnahmen des vorigen Monats vergleicht
     public Double compareIncome(int month, int year){
         // Variablen zum Zwischenspeichern der Berechnungen
-        double sum1 = 0;
-        double sum2 = 0;
-        double income1 = 0;
-        double income2 = 0;
-        double differenz = 0;
+        double sumMonth = 0;
+        double sumMonthBefore = 0;
 
-        // check if aktueller Monat
+        // check if aktueller Monat -> Belegung der Variablen
         LocalDate currentDate = Calendar.getInstance().getTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         if (month == currentDate.getMonthValue() && year == currentDate.getYear()){
             // alle Transaktionen des gewählten Monats in Liste speichern
-            List<Creditcardtransaction> cctUntilDay = this.transactionRepository.findAllTransactionsByDay(month, year);
-            List<Creditcardtransaction> cctUntilDayMonthBefore;
+            sumMonth = this.transactionRepository.findSumOfAllTransactionsByDay(month, year);
             // alle Transaktionen des Monats zuvor in Liste speichern
             if(month == 01){
-                cctUntilDayMonthBefore = this.transactionRepository.findAllTransactionsByMonth(12, year-1);
+                sumMonthBefore = this.transactionRepository.findSumOfAllTransactionsByDay(12, year-1);
             } else{
-                cctUntilDayMonthBefore = this.transactionRepository.findAllTransactionsByMonth(month-1, year);
+                sumMonthBefore = this.transactionRepository.findSumOfAllTransactionsByDay(month-1, year);
             }
-
-            // income Monat 1 bis zum aktuellen Tag
-            for(int i = 0; i < cctUntilDay.size(); i++){
-                sum1 = sum1 + cctUntilDay.get(i).getSum();
-            }
-            income1 = sum1 * 0.02; // man könnte auch einfach die Summen vergleichen, gefragt sind aber Einnahmen
-
-            // income Monat 2 bis zum gleihen Tag
-            for(int i = 0; i < cctUntilDay.size(); i++){
-                sum2 = sum2 + cctUntilDayMonthBefore.get(i).getSum();
-            }
-            income2 = sum2 * 0.02; // man könnte auch einfach die Summen vergleichen, gefragt sind aber Einnahmen
         }
         // ansonsten berechne es für den gesamten Monat
         else {
-            // alle Transaktionen des gewählten Monats in Liste speichern
-            List<Creditcardtransaction> cctMonth = this.transactionRepository.findAllTransactionsByMonth(month, year);
-            List<Creditcardtransaction> cctMonthBefore;
-            // alle Transaktionen des Monats zuvor in Liste speichern
+            // Summe aller Transaktionen des gewählten Monats in Variable speichern
+            sumMonth = this.transactionRepository.findSumOfAllTransactionsByMonth(month, year);
+            // Summe aller Transaktionen des Monats zuvor in Variable speichern
             if(month == 01){
-                cctMonthBefore = this.transactionRepository.findAllTransactionsByMonth(12, year-1);
+                sumMonthBefore = this.transactionRepository.findSumOfAllTransactionsByMonth(12, year-1);
             } else{
-                cctMonthBefore = this.transactionRepository.findAllTransactionsByMonth(month-1, year);
+                sumMonthBefore = this.transactionRepository.findSumOfAllTransactionsByMonth(month-1, year);
             }
-            // income Monat 1
-            for(int i = 0; i < cctMonth.size(); i++){
-                sum1 = sum1 + cctMonth.get(i).getSum();
-            }
-            income1 = sum1 * 0.02; // man könnte auch einfach die Summen vergleichen, gefragt sind aber Einnahmen
-
-            // income Monat 2
-            for(int i = 0; i < cctMonthBefore.size(); i++){
-                sum2 = sum2 + cctMonthBefore.get(i).getSum();
-            }
-            income2 = sum2 * 0.02; // man könnte auch einfach die Summen vergleichen, gefragt sind aber Einnahmen
-
-
         }
-        // Vergleich income 1 mit income 2
-        differenz = income1 - income2;
-        System.out.println("Die Differenz der Einnahmen zwischen Monat 1 & 2 liegt bei: "+differenz);
-        return differenz;
+
+       // System.out.println("Die Differenz der Einnahmen zwischen Monat 1 & 2 liegt bei: "+ (sumMonth - sumMonthBefore));
+        return sumMonth - sumMonthBefore;
     }
 
 
@@ -202,7 +171,6 @@ public class VendorServiceImpl implements VendorService {
 //    }
     //Funktionsfähig
     //Gibt alle Kunden aus welche im Monat 5 erfolglose Transaktionen hatten -> manchmal aber den falschen Kunden ???
-    //Es fehlt noch die implementierung des Parameters für den Monat
     @Override
     public void findDistinctByStatus(int month, int year){
         List<Creditcardtransaction> cct = transactionRepository.findDistinctByStatus(month, year);
