@@ -208,7 +208,12 @@ public class ManualTestBean {
        log.info("abzurechnender Betrag für den aktuellen Monat, Parameter vUuid: "+ String.valueOf(transactionRepository.findAllByVendorandCurrentMonth(v6.getVUuid())));
 
         // Aufgabe 1.2: gibt aktuellen Einnahmen des Startups für übergebenen Monat zurück:
-               log.info("Einnahmen des Startups in Monat, Parameter Monat, Jahr: "+String.valueOf(transactionRepository.findAllTransactionsByMonth(2, 2021)));
+        // log.info("Einnahmen des Startups in Monat, Parameter Monat, Jahr: "+String.valueOf(transactionRepository.findAllTransactionsByMonth(2, 2021)));
+
+        log.info("1.2 Neu");
+        log.info(String.valueOf(transactionRepository.findAllTransactionsByMonth2(2,2021)));
+        log.info("1.3");
+        log.info(String.valueOf(vendorRepository.findTop1Desc()));
 
     }
 }
