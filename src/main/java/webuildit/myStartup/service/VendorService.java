@@ -19,7 +19,7 @@ public interface VendorService {
    Double compareIncome(int month, int year);
    //Double getCostForVendorForCurrentMonth(UUID vUuid);
    void findDistinctByStatus(int month, int year);
-   List<Customer> findAllCustomerWithFiveFailedTransaction();
+  // List<Customer> findAllCustomerWithFiveFailedTransaction();
    List<Creditcardtransaction> findAllByTdateLikeAndVendor(LocalDate date, UUID vUuid);
   // List<Creditcardtransaction> findAllByTdateMonth(int date);
   // Aufgabe 1: Bei Eingabe der Id eines Verkäufers, der abzurechnende Betrag für diesen für den aktuellen Monat zurückgegeben wird.

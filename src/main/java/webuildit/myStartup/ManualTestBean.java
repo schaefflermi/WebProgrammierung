@@ -211,8 +211,10 @@ public class ManualTestBean {
 //        log.info("Einnahmen des Startups in Monat: "+String.valueOf(transactionRepository.findSumOfAllTransactionsByMonth(2,2021)));
 //
 //        // Aufgabe 1.3: Auswertung 3 Gewerbe mit höchsten  & niedrigsten Umsätzen: (bisher noch alle nach Umsätzen geordnet) -> ASC funktioniert, DESC nicht limitiert auf 3
-//        log.info("3 Gewerbe mit höchsten Umsätzen:"+String.valueOf(vendorRepository.findTop3Desc()));
-//        log.info("3 Gewerbe mit niedrigsten Umsätzen:"+String.valueOf(vendorRepository.findTop3Asc()));
+       log.info("3 Gewerbe mit höchsten Umsätzen:"+String.valueOf(vendorRepository.findTop3Desc()));
+       log.info("3 Gewerbe mit niedrigsten Umsätzen:"+String.valueOf(vendorRepository.findTop3Asc()));
+       log.info("Mindestens 5 erfolglose Transaktionen im Monat n "+ customerRepository.findAllCustomerWithFiveFailedTransaction(1));
+       log.info("Transactionen im Monat: "+transactionRepository.findSumOfAllTransactionsByDay(1,2021));
 
     }
 }

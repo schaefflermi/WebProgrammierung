@@ -21,7 +21,7 @@ public interface VendorRepository extends JpaRepository<Vendor, UUID> {
 
     //Aufgabe 1.3: 3 Gewerbe mit höchsten Umsätzen
     //!!!!!!!!Limiertung auf 3 Ergebnisse noch nicht implementiert!!!!!!!! -> limitierung mit rownum funktioniert (siehe unten), aber wird vor "desc" ausgeführt, daher falsches Ergebnis
-    @Query("SELECT v.classification, sum(c.sum) as Summe FROM Creditcardtransaction c, Vendor v where  c.vendor = v.vUuid and c.status = true  group by v.classification order by Summe desc ")
+    @Query("SELECT v.classification, sum(c.sum) as Summe FROM Creditcardtransaction c, Vendor v where  c.vendor = v.vUuid and c.status = true group by v.classification order by Summe desc ")
     List<String> findTop3Desc();
 
     //Aufgabe 1.3: 3 Gewerbe mit niedrigsten Umsätzen

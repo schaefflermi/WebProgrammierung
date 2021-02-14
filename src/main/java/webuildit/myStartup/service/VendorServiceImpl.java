@@ -212,12 +212,12 @@ public class VendorServiceImpl implements VendorService {
     }*/
 
 
-
-    @Override
+    //aufgabe 1.4 (nicht mehr Notwendig
+    /*@Override
     public List<Customer> findAllCustomerWithFiveFailedTransaction() {
         var customer = (List<Customer>) customerRepository.findAllCustomerWithFiveFailedTransaction();
         return customer;
-    }
+    }*/
 
     @Override
     public List<Creditcardtransaction> findAllByTdateLikeAndVendor(LocalDate date, UUID vUuid) {
