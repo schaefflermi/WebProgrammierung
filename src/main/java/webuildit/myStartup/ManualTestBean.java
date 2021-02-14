@@ -70,7 +70,7 @@ public class ManualTestBean {
         Creditcardtransaction c5 = new Creditcardtransaction("A Müller buys a home", 80000,true, LocalDate.of(2020, 03, 18) );
         Creditcardtransaction c6 = new Creditcardtransaction("P Müller plans on building a home", 1500, true, LocalDate.of(2020, 03, 25));
         Creditcardtransaction c7 = new Creditcardtransaction("Beck builds a terrasse", 3000, true, LocalDate.of(2021, 02,03));
-        Creditcardtransaction c8 = new Creditcardtransaction("Fogel build a garage", 1200, true, LocalDate.of(2020, 04, 03));
+        Creditcardtransaction c8 = new Creditcardtransaction("Fogel build a garage", 1200, true, LocalDate.of(2020, 04, 15));
         Creditcardtransaction c9 = new Creditcardtransaction("Smith bilds a home", 37058, true, LocalDate.of(2020, 02,15 ));
         Creditcardtransaction c10 = new Creditcardtransaction("A Müller buys his sister a flat", 30000, true, LocalDate.of(2020, 03, 19));
         Creditcardtransaction c11 = new Creditcardtransaction("fail1", 50, false, LocalDate.of(2020, 04, 19));
@@ -212,9 +212,10 @@ public class ManualTestBean {
 //
 //        // Aufgabe 1.3: Auswertung 3 Gewerbe mit höchsten  & niedrigsten Umsätzen: (bisher noch alle nach Umsätzen geordnet) -> ASC funktioniert, DESC nicht limitiert auf 3
        log.info("3 Gewerbe mit höchsten Umsätzen:"+String.valueOf(vendorRepository.findTop3Desc()));
-       log.info("3 Gewerbe mit niedrigsten Umsätzen:"+String.valueOf(vendorRepository.findTop3Asc()));
+       log.info("3 Gewerbe mit niedrigsten Umsätzen:"+String.valueOf(vendorRepository.findAllTop3Asc()));
        log.info("Mindestens 5 erfolglose Transaktionen im Monat n "+ customerRepository.findAllCustomerWithFiveFailedTransaction(1));
-       log.info("Transactionen im Monat: "+transactionRepository.findSumOfAllTransactionsByDay(1,2021));
+       log.info("Transactionen im Monat: "+transactionRepository.findSumOfAllTransactionsByDay(4,2020));
+     //  transactionRepository.findAllByTdateMonthAndTdateYearandStatusTrue(1,2021).forEach(Creditcardtransaction-> log.info(String.valueOf(Creditcardtransaction.getSum())));
 
     }
 }

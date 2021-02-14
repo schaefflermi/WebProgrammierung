@@ -48,6 +48,6 @@ public interface TransactionRepository extends JpaRepository<Creditcardtransacti
     Double findSumOfAllTransactionsByMonth(@Param("param1")int month, @Param("param2")int year);
 
     // für Aufgabe 1.5 - Einnahmen bis aktueller Tag
-    @Query("Select SUM(c.sum)*0.02 from Creditcardtransaction c where month(c.tdate) = :param1 and year(c.tdate) = :param2 and c.tdate <= CURRENT_TIMESTAMP  and c.status=true")
+    @Query("Select SUM(c.sum)*0.02 from Creditcardtransaction c where month(c.tdate) = :param1 and year(c.tdate) = :param2 and c.tdate <= CURRENT_TIMESTAMP and c.status=true")
     Double findSumOfAllTransactionsByDay(@Param("param1")int month, @Param("param2")int year);
 }
