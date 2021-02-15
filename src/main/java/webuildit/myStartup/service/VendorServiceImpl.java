@@ -11,6 +11,7 @@ import webuildit.myStartup.repository.CustomerRepository;
 import webuildit.myStartup.repository.TransactionRepository;
 import webuildit.myStartup.repository.VendorRepository;
 
+import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.YearMonth;
@@ -223,6 +224,20 @@ public class VendorServiceImpl implements VendorService {
     public List<Creditcardtransaction> findAllByTdateLikeAndVendor(LocalDate date, UUID vUuid) {
         var cct = (List<Creditcardtransaction>) transactionRepository.findAllByTdateLikeAndVendor(date, vUuid);
         return null;
+    }
+
+    @Override
+    public Double compareIncomeBeetweenOneMonth(int month, int year) {
+        DateFormat date = DateFormat.getDateInstance(DateFormat.MEDIUM);
+        LocalDate date1 = LocalDate.now();
+        LocalDate date2 = date1.minusMonths(1);
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+        Date date3 = Date.from(date2.atStartOfDay(defaultZoneId).toInstant());
+       // log.info(String.valueOf(date1.minusMonths(1)));
+
+        Double List1 = transactionRepository.findSumOfAllTransactionsByMonth(month, year);
+        Double List2 = transactionRepository.findSumOfAllTransactionsByPreviousMonth3(month -1, year, date2);
+        return List1-List2;
     }
     // Aufgabe 1: Bei Eingabe der Id eines Verkäufers, der abzurechnende Betrag für diesen für den aktuellen Monat zurückgegeben wird.
     /*@Override

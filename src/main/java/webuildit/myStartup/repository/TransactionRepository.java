@@ -9,6 +9,7 @@ import webuildit.myStartup.model.Creditcardtransaction;
 import webuildit.myStartup.model.Vendor;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -45,9 +46,13 @@ public interface TransactionRepository extends JpaRepository<Creditcardtransacti
     List<Creditcardtransaction> findAllTransactionsByMonth(@Param("param1")int month, @Param("param2")int year);
     //Aufgabe 1.2 neu
     @Query("Select sum(c.sum) from Creditcardtransaction c where month(c.tdate) = :param1 and year(c.tdate) = :param2 and c.status=true")
+    Double findSumOfAllTransactionsByDay(@Param("param1")int month, @Param("param2")int year);
+
+    // für Aufgabe 1.5 - Einnahmen des aktuellen Monats
+    @Query("Select SUM(c.sum)*0.02 from Creditcardtransaction c where month(c.tdate) = :param1 and year(c.tdate) = :param2 and c.status=true and c.tdate <= CURRENT_TIMESTAMP ")
     Double findSumOfAllTransactionsByMonth(@Param("param1")int month, @Param("param2")int year);
 
-    // für Aufgabe 1.5 - Einnahmen bis aktueller Tag
-    @Query("Select SUM(c.sum)*0.02 from Creditcardtransaction c where month(c.tdate) = :param1 and year(c.tdate) = :param2 and c.tdate <= CURRENT_TIMESTAMP and c.status=true")
-    Double findSumOfAllTransactionsByDay(@Param("param1")int month, @Param("param2")int year);
+    // für Aufgabe 1.5 - Einnahmen des Vormonats
+   @Query("Select SUM(c.sum)*0.02 from Creditcardtransaction c where month(c.tdate) = :param1 and year(c.tdate) = :param2 and c.status=true and c.tdate <= :param3")
+    Double findSumOfAllTransactionsByPreviousMonth3(@Param("param1")int month, @Param("param2")int year, @Param("param3") LocalDate date);
 }

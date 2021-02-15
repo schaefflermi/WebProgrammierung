@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 import webuildit.myStartup.controller.CCTController;
 import webuildit.myStartup.controller.CCTControllerImpl;
@@ -17,11 +18,10 @@ import webuildit.myStartup.repository.VendorRepository;
 import webuildit.myStartup.service.VendorService;
 import webuildit.myStartup.service.VendorServiceImpl;
 
+import java.text.DateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Component
 @Slf4j
@@ -71,7 +71,7 @@ public class ManualTestBean {
         Creditcardtransaction c6 = new Creditcardtransaction("P Müller plans on building a home", 1500, true, LocalDate.of(2020, 03, 25));
         Creditcardtransaction c7 = new Creditcardtransaction("Beck builds a terrasse", 3000, true, LocalDate.of(2021, 02,03));
         Creditcardtransaction c8 = new Creditcardtransaction("Fogel build a garage", 1200, true, LocalDate.of(2020, 04, 15));
-        Creditcardtransaction c9 = new Creditcardtransaction("Smith bilds a home", 37058, true, LocalDate.of(2020, 02,15 ));
+        Creditcardtransaction c9 = new Creditcardtransaction("Smith bilds a home", 37058, true, LocalDate.of(2021, 02,15 ));
         Creditcardtransaction c10 = new Creditcardtransaction("A Müller buys his sister a flat", 30000, true, LocalDate.of(2020, 03, 19));
         Creditcardtransaction c11 = new Creditcardtransaction("fail1", 50, false, LocalDate.of(2020, 04, 19));
         Creditcardtransaction c12 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
@@ -213,9 +213,14 @@ public class ManualTestBean {
 //        // Aufgabe 1.3: Auswertung 3 Gewerbe mit höchsten  & niedrigsten Umsätzen: (bisher noch alle nach Umsätzen geordnet) -> ASC funktioniert, DESC nicht limitiert auf 3
        log.info("3 Gewerbe mit höchsten Umsätzen:"+String.valueOf(vendorRepository.findTop3Desc()));
        log.info("3 Gewerbe mit niedrigsten Umsätzen:"+String.valueOf(vendorRepository.findAllTop3Asc()));
-       log.info("Mindestens 5 erfolglose Transaktionen im Monat n "+ customerRepository.findAllCustomerWithFiveFailedTransaction(1));
-       log.info("Transactionen im Monat: "+transactionRepository.findSumOfAllTransactionsByDay(4,2020));
+       log.info("Mindestens 5 erfolglose Transaktionen im Monat n "+ customerRepository.findAllCustomerWithFiveFailedTransaction(1, 2021));
+       log.info("Transactionen im Monat: "+transactionRepository.findSumOfAllTransactionsByMonth(4,2020));
      //  transactionRepository.findAllByTdateMonthAndTdateYearandStatusTrue(1,2021).forEach(Creditcardtransaction-> log.info(String.valueOf(Creditcardtransaction.getSum())));
-
+        Date currentTime = new Date();
+        DateFormat date = DateFormat.getDateInstance(DateFormat.MEDIUM);
+        DateTimeFormatter df = DateTimeFormatter.ISO_LOCAL_DATE;
+        LocalDate date1 = LocalDate.now();
+        log.info(String.valueOf(date1.minusMonths(1)));
+        log.info(String.valueOf(vendorService.compareIncomeBeetweenOneMonth(2,2021)));
     }
 }

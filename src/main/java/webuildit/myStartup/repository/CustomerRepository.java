@@ -12,6 +12,6 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
     @Query("SELECT distinct c FROM Creditcardtransaction c, Customer d  where  c.status = false ")
     List<Customer> findDistinctBycUuid();
     //Aufgabe 1.4: alle Kunden mit mindestens 5 erfolglosen Transaktionen in dem Monat
-    @Query("SELECT distinct d.cName FROM Creditcardtransaction c, Customer d where c.status = false and c.customer = d.cUuid  and month(c.tdate) = ?1 group by d.cName having count(c.status) > 4")
-    List<String> findAllCustomerWithFiveFailedTransaction(int month);
+    @Query("SELECT d.cName FROM Creditcardtransaction c, Customer d where c.status = false and c.customer = d.cUuid  and month(c.tdate) = ?1 and year(c.tdate) = ?2 group by d.cName having count(c.status) > 4")
+    List<String> findAllCustomerWithFiveFailedTransaction(int month, int year);
 }
