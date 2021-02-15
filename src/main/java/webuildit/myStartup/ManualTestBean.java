@@ -67,7 +67,7 @@ public class ManualTestBean {
         Creditcardtransaction c2 = new Creditcardtransaction("Anja Beck buys from an agriculture company", 75, true,  LocalDate.of(2021,01,20));
         Creditcardtransaction c3 = new Creditcardtransaction("Tony Smith has a little company using SAP software and buys it in his own name", 15000, true, LocalDate.of(2021, 01, 22));
         Creditcardtransaction c4 = new Creditcardtransaction("Fogel buys some house related stuff", 1050, true, LocalDate.of(2021, 01, 02));
-        Creditcardtransaction c5 = new Creditcardtransaction("A Müller buys a home", 80000,true, LocalDate.of(2020, 03, 18) );
+        Creditcardtransaction c5 = new Creditcardtransaction("A Müller buys a home", 80000,true, LocalDate.of(2020, 04, 18) );
         Creditcardtransaction c6 = new Creditcardtransaction("P Müller plans on building a home", 1500, true, LocalDate.of(2020, 03, 25));
         Creditcardtransaction c7 = new Creditcardtransaction("Beck builds a terrasse", 3000, true, LocalDate.of(2021, 02,03));
         Creditcardtransaction c8 = new Creditcardtransaction("Fogel build a garage", 1200, true, LocalDate.of(2020, 04, 15));
@@ -164,5 +164,11 @@ public class ManualTestBean {
         // Gibt alle Werte der ersten Aufgabe zurück
         vendorService.getStatisticsAboutMonth(2,2021);
         log.info(String.valueOf(transactionRepository.findAllByVendorandCurrentMonth(v6.getVUuid())));
+        log.info("-------------Aufgabe 1.2 -------------");
+        this.transactionRepository.findSumByTdateBetweenAndStatusIsTrue(LocalDate.of(2021, 01, 01),LocalDate.of(2021, 01, 31)).
+                forEach(creditcardtransaction -> log.info(String.valueOf(creditcardtransaction.getSum())));
+        log.info("----- Test -----");
+        //this.transactionRepository.findTUuidByVendor_id(v6.getVUuid()).
+         //       forEach(creditcardtransaction -> log.info(String.valueOf(creditcardtransaction.getSum())));
     }
 }

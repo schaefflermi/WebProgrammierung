@@ -17,11 +17,4 @@ public class CCTControllerImpl implements CCTController {
     public CCTControllerImpl(){
 
     }
-    public  String getTransactionFee(){
-       // List<Creditcardtransaction> cct1 = transactionRepository.findAll();
-
-        return "cct1.get(0).getDescription()";
-    }
-
-
 }

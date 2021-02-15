@@ -31,15 +31,15 @@ public class Creditcardtransaction {
     @JoinColumn(name="customer_id", nullable = true)
     private Customer customer;
 
-    // 1:n Beziehung zu Kunde
+    // 1:n Beziehung zu Verkäufer
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="vendor_id", nullable = true)
     private Vendor vendor;
 
     // Konstruktor
     public Creditcardtransaction(String description, double sum, boolean status, LocalDate tdate){
-        this.description=description;
-        this.sum=sum;
+        this.description = description;
+        this.sum = sum;
         this.status=status;
         this.tdate = tdate;
     }
