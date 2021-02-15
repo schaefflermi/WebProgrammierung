@@ -161,66 +161,8 @@ public class ManualTestBean {
         customer_6.setTransactions(Arrays.asList(c11, c12, c13, c14, c15));
         this.customerRepository.saveAll(Arrays.asList(customer_1, customer_2, customer_3, customer_4,customer_5, customer_6));
 
-
-        log.info("----test: ----");
-
-     //   System.out.println(" differenz ------------     "+ vendorService.compareIncome(LocalDate.of(2020, 03, 01), LocalDate.of(2020, 03, 31), LocalDate.of(2020, 04, 01), LocalDate.of(2020, 04, 30)));
-
-
-        /*log.info("--------- Get fees for startup - funktioniert!!!: -----------");
-        log.info(String.valueOf(vendorService.getTransactionFee()));
-        System.out.println("Summe für einen Monat: "+vendorService.getCostForVendorForCurrentMonth(v6.getVUuid()));
-        vendorService.findDistinctByStatus(false);
-        log.info("--------------------");*/
-        /*transactionRepository.findDistinctByCustomer().
-        forEach(Creditcardtransaction->log.info((""+Creditcardtransaction.getCustomer().getCUuid())));*/
-       /* customerRepository.findDistinctBycUuid().forEach(Customer->log.info(String.valueOf(Customer.getCUuid())));*/
-        /*vendorService.findDistinctByStatus(false);*/
-       /* transactionRepository.findAll();*/
-        /*vendorService.findAllWhereStatusFalse().forEach(creditcardtransaction->log.info(""+creditcardtransaction.getCustomer().getCUuid()));*/
-        /*vendorService.findAllCustomerWithFiveFailedTransaction().forEach(Customer->log.info(String.valueOf(Customer.getCUuid())));
-        log.info("--------------------");*/
-       // vendorService.findAllByTdateMonth(2).forEach(Creditcardtransaction->log.info(String.valueOf(Creditcardtransaction.getTdate())));
-        log.info("--------------------");
-       // transactionRepository.findAllByTdate_Month("February").forEach(Creditcardtransaction->log.info(String.valueOf(Creditcardtransaction.getTdate())));
-      //  transactionRepository.getByYearandMonth(2021,2).forEach(Creditcardtransaction->log.info(Creditcardtransaction.getDescription()));
-       // transactionRepository.findAllByVendor_id(v6.getVUuid()).forEach(Creditcardtransaction-> double sum = sum + Creditcardtransaction.getSum());
-
-        //      vendorRepository.findAllDistinctByClassification().forEach(Vendor->log.info(String.valueOf(Vendor.getVUuid())));
-        //    vendorRepository.findAllDistinctByClassification().forEach(Vendor->log.info(String.valueOf(Vendor.getClassification())));
-
-
-
-
-
-
-        // Aufgabe 1.4: alle Kunden mit mindestens 5 erfolglosen Transaktionen im gewählten Monat (z.B. 01 2021) -> nochmal überarbeiten?
-     //   vendorService.findDistinctByStatus(01, 2021);
-
-        // Aufgabe 1.5: Differenz zwischen eingegebenen Monat & vorigem Monat -> testen !!!!!!
-        log.info("Einkommensdifferenz zwischen Monaten: "+String.valueOf(vendorService.compareIncome(02, 2021)));
-
-
-
-
-
-//        // Aufgabe 1.1: abzurechnenden Betrag für den aktuellen Monat, Parameter vUUid:
-//       log.info("abzurechnender Betrag für den aktuellen Monat: "+ String.valueOf(transactionRepository.findAllByVendorandCurrentMonth(v6.getVUuid())));
-//
-//        // Aufgabe 1.2: gibt aktuellen Einnahmen des Startups für übergebenen Monat zurück, Parameter Monat & Jahr:
-//        log.info("Einnahmen des Startups in Monat: "+String.valueOf(transactionRepository.findSumOfAllTransactionsByMonth(2,2021)));
-//
-//        // Aufgabe 1.3: Auswertung 3 Gewerbe mit höchsten  & niedrigsten Umsätzen: (bisher noch alle nach Umsätzen geordnet) -> ASC funktioniert, DESC nicht limitiert auf 3
-       log.info("3 Gewerbe mit höchsten Umsätzen:"+String.valueOf(vendorRepository.findTop3Desc()));
-       log.info("3 Gewerbe mit niedrigsten Umsätzen:"+String.valueOf(vendorRepository.findAllTop3Asc()));
-       log.info("Mindestens 5 erfolglose Transaktionen im Monat n "+ customerRepository.findAllCustomerWithFiveFailedTransaction(1, 2021));
-       log.info("Transactionen im Monat: "+transactionRepository.findSumOfAllTransactionsByMonth(4,2020));
-     //  transactionRepository.findAllByTdateMonthAndTdateYearandStatusTrue(1,2021).forEach(Creditcardtransaction-> log.info(String.valueOf(Creditcardtransaction.getSum())));
-        Date currentTime = new Date();
-        DateFormat date = DateFormat.getDateInstance(DateFormat.MEDIUM);
-        DateTimeFormatter df = DateTimeFormatter.ISO_LOCAL_DATE;
-        LocalDate date1 = LocalDate.now();
-        log.info(String.valueOf(date1.minusMonths(1)));
-        log.info(String.valueOf(vendorService.compareIncomeBeetweenOneMonth(2,2021)));
+        // Gibt alle Werte der ersten Aufgabe zurück
+        vendorService.getStatisticsAboutMonth(2,2021);
+        log.info(String.valueOf(transactionRepository.findAllByVendorandCurrentMonth(v6.getVUuid())));
     }
 }

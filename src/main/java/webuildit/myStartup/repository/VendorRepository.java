@@ -13,14 +13,7 @@ import java.util.UUID;
 
 @Repository
 public interface VendorRepository extends JpaRepository<Vendor, UUID> {
-    List<Vendor> findByClassification(Classification classification);
-    List<Vendor> findAll();
-   // List<Vendor>findCreditcardtransactionsByvUuid(UUID vUuid);
-    @Query("SELECT v FROM Creditcardtransaction c, Vendor v where  c.vendor.vUuid = v.vUuid")
-    List<Vendor> findAllDistinctByClassification();
-
-    //Aufgabe 1.3: 3 Gewerbe mit höchsten Umsätzen
-    //!!!!!!!!Limiertung auf 3 Ergebnisse noch nicht implementiert!!!!!!!! -> limitierung mit rownum funktioniert (siehe unten), aber wird vor "desc" ausgeführt, daher falsches Ergebnis
+   //Aufgabe 1.3: 3 Gewerbe mit höchsten Umsätzen
     @Query(nativeQuery = true, value ="SELECT v.classification, sum(c.sum) as Summe FROM Creditcardtransaction c, Vendor v where c.vendor_id = v.Uuid and c.status = true group by v.classification order by Summe desc LIMIT 3")
     List<String> findTop3Desc();
 
