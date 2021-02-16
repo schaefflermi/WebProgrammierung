@@ -29,7 +29,7 @@ public interface TransactionRepository extends JpaRepository<Creditcardtransacti
     Double findSumOfAllTransactionsByDay(@Param("param1")int month, @Param("param2")int year);
 
     //Aufgabe 1.2 als abgeleitete Abfrage
-    List<Creditcardtransaction> findSumByTdateBetweenAndStatusIsTrue(LocalDate date1, LocalDate date2);
+ //   List<Creditcardtransaction> findSumByTdateBetweenAndVendorvuuidAndStatusIsTrue(LocalDate date1, LocalDate date2, UUID uuid);
 
     // für Aufgabe 1.5 - Einnahmen des aktuellen Monats
     @Query("Select SUM(c.sum)*0.02 from Creditcardtransaction c where month(c.tdate) = :param1 and year(c.tdate) = :param2 and c.status=true and c.tdate <= CURRENT_TIMESTAMP ")
@@ -40,4 +40,5 @@ public interface TransactionRepository extends JpaRepository<Creditcardtransacti
     Double findSumOfAllTransactionsByPreviousMonth3(@Param("param1")int month, @Param("param2")int year, @Param("param3") LocalDate date);
 
    // List<Creditcardtransaction>findTUuidByVendor_id(UUID uuid);
+    List<Creditcardtransaction> findSumByVendor_vUuidAndStatusIsTrueAndTdateBetween(UUID uuid, LocalDate date1, LocalDate date2);
 }

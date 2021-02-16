@@ -11,5 +11,6 @@ import java.util.UUID;
 public interface VendorService {
     Double compareIncomeBeetweenOneMonth(int month, int year);
     void getStatisticsAboutMonth(int month, int year);
+    void getFeeForVendor(UUID uuid);
 
 }

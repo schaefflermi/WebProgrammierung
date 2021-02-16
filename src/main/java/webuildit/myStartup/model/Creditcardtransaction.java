@@ -40,7 +40,7 @@ public class Creditcardtransaction {
     public Creditcardtransaction(String description, double sum, boolean status, LocalDate tdate){
         this.description = description;
         this.sum = sum;
-        this.status=status;
+        this.status = status;
         this.tdate = tdate;
     }
 

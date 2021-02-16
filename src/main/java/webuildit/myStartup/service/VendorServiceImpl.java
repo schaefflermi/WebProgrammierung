@@ -1,22 +1,14 @@
 package webuildit.myStartup.service;
 
-import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import webuildit.myStartup.model.Classification;
-import webuildit.myStartup.model.Creditcardtransaction;
-import webuildit.myStartup.model.Customer;
-import webuildit.myStartup.model.Vendor;
 import webuildit.myStartup.repository.CustomerRepository;
 import webuildit.myStartup.repository.TransactionRepository;
 import webuildit.myStartup.repository.VendorRepository;
 
-import java.text.DateFormat;
-import java.time.LocalDate;
-import java.time.Year;
-import java.time.YearMonth;
-import java.time.ZoneId;
+import java.time.*;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 public class VendorServiceImpl implements VendorService {
@@ -53,5 +45,20 @@ public class VendorServiceImpl implements VendorService {
        System.out.println("1.3 drei Gewerbe mit den niedrigsten Einkommen " + vendorRepository.findAllTop3Asc());
        System.out.println("1.4 alle Kunden mit mindestens 5 erfolglosen Transaktionen in dem Monat "+ customerRepository.findAllCustomerWithFiveFailedTransaction(month, year));
        System.out.println("1.5 Differenz zwischen den Einnahmen des eingegebenen Monats mit dem Vormonat "+ this.compareIncomeBeetweenOneMonth(month, year));
+    }
+
+    @Override
+    public void getFeeForVendor(UUID uuid) {
+        UUID vendorUuid = uuid;
+        // Aktuelles Datum beschaffen
+        LocalDate date1 = LocalDate.now();
+        // Aktuellen Monat beschaffen
+        Month dateMonth1 = date1.getMonth();
+        // Aktuelles Jahr beschaffen
+        int dateYear1 = date1.getYear();
+
+        System.out.println("--------------- TEST AUSGABE -------------");
+        this.transactionRepository.findSumByVendor_vUuidAndStatusIsTrueAndTdateBetween(vendorUuid, LocalDate.of(dateYear1, dateMonth1, 1), LocalDate.of(dateYear1, dateMonth1,28)).
+                forEach(creditcardtransaction ->System.out.println(creditcardtransaction.getSum()));
     }
 }

@@ -21,5 +21,7 @@ public interface VendorRepository extends JpaRepository<Vendor, UUID> {
     @Query(nativeQuery = true, value ="SELECT v.classification, sum(c.sum) as Summe FROM Creditcardtransaction c, Vendor v where  c.vendor_id = v.Uuid and c.status = true  group by v.classification order by Summe asc LIMIT 3 ")
     List<String> findAllTop3Asc();
 
+    //List<Vendor> findByVUuid(UUID vuuid);
+
 
 }

@@ -1,5 +1,6 @@
 package webuildit.myStartup;
 
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -165,10 +166,9 @@ public class ManualTestBean {
         vendorService.getStatisticsAboutMonth(2,2021);
         log.info(String.valueOf(transactionRepository.findAllByVendorandCurrentMonth(v6.getVUuid())));
         log.info("-------------Aufgabe 1.2 -------------");
-        this.transactionRepository.findSumByTdateBetweenAndStatusIsTrue(LocalDate.of(2021, 01, 01),LocalDate.of(2021, 01, 31)).
-                forEach(creditcardtransaction -> log.info(String.valueOf(creditcardtransaction.getSum())));
-        log.info("----- Test -----");
-        //this.transactionRepository.findTUuidByVendor_id(v6.getVUuid()).
-         //       forEach(creditcardtransaction -> log.info(String.valueOf(creditcardtransaction.getSum())));
+        vendorService.getFeeForVendor(v6.getVUuid());
+
+
+
     }
 }
