@@ -56,9 +56,11 @@ public class VendorServiceImpl implements VendorService {
         Month dateMonth1 = date1.getMonth();
         // Aktuelles Jahr beschaffen
         int dateYear1 = date1.getYear();
+        //Anz Tage bis zum aktuellen Tag
+        int actualtDayOfMonth = date1.getDayOfMonth();
 
         System.out.println("--------------- TEST AUSGABE -------------");
-        this.transactionRepository.findSumByVendor_vUuidAndStatusIsTrueAndTdateBetween(vendorUuid, LocalDate.of(dateYear1, dateMonth1, 1), LocalDate.of(dateYear1, dateMonth1,28)).
+        this.transactionRepository.findSumByVendor_vUuidAndStatusIsTrueAndTdateBetween(vendorUuid, LocalDate.of(dateYear1, dateMonth1, 1), LocalDate.of(dateYear1, dateMonth1,actualtDayOfMonth)).
                 forEach(creditcardtransaction ->System.out.println(creditcardtransaction.getSum()));
     }
 }
