@@ -8,7 +8,6 @@ import webuildit.myStartup.repository.VendorRepository;
 
 import java.time.*;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 public class VendorServiceImpl implements VendorService {
@@ -48,7 +47,7 @@ public class VendorServiceImpl implements VendorService {
     }
 
     @Override
-    public void getFeeForVendor(UUID uuid) {
+    public String getFeeForVendor(UUID uuid) {
         UUID vendorUuid = uuid;
         // Aktuelles Datum beschaffen
         LocalDate date1 = LocalDate.now();
@@ -58,9 +57,13 @@ public class VendorServiceImpl implements VendorService {
         int dateYear1 = date1.getYear();
         //Anz Tage bis zum aktuellen Tag
         int actualtDayOfMonth = date1.getDayOfMonth();
+        // Variable um die Einahmen eines Verkäufers zu zählen
+        final double[] sum = {0};
 
         System.out.println("--------------- TEST AUSGABE -------------");
         this.transactionRepository.findSumByVendor_vUuidAndStatusIsTrueAndTdateBetween(vendorUuid, LocalDate.of(dateYear1, dateMonth1, 1), LocalDate.of(dateYear1, dateMonth1,actualtDayOfMonth)).
-                forEach(creditcardtransaction ->System.out.println(creditcardtransaction.getSum()));
+                forEach(creditcardtransaction -> sum[0] = sum[0] + creditcardtransaction.getSum());
+
+        return String.valueOf(sum[0]);
     }
 }

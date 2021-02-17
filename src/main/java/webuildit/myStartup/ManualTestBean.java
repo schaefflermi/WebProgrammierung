@@ -166,7 +166,7 @@ public class ManualTestBean {
         vendorService.getStatisticsAboutMonth(2,2021);
         log.info(String.valueOf(transactionRepository.findAllByVendorandCurrentMonth(v6.getVUuid())));
         log.info("-------------Aufgabe 1.2 -------------");
-        vendorService.getFeeForVendor(v6.getVUuid());
+        log.info(vendorService.getFeeForVendor(v6.getVUuid()));
 
 
 
