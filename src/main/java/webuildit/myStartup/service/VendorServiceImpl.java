@@ -77,7 +77,7 @@ public class VendorServiceImpl implements VendorService {
     public VendorDTO addVendor(VendorDTO vendorDTO) {
         Vendor tmp = new Vendor(vendorDTO.getVName(), vendorDTO.getVAddress(), vendorDTO.getClassifictation());
         this.vendorRepository.save(tmp);
-        return new VendorDTO(tmp.getVUuid(), tmp.getVName(), tmp.getVAddress(), tmp.getClassification());
+        return new VendorDTO(tmp.getVUuid(), tmp.getVName(), tmp.getVAddress(), tmp.getClassification(), null);
     }
 
     @Override
@@ -98,14 +98,15 @@ public class VendorServiceImpl implements VendorService {
     @Transactional
     @Override
     public VendorDTO updateVendor(VendorDTO newVendor) {
-        Vendor tmp = this.;
+      /*  Vendor tmp = this.;
 
         List<Creditcardtransaction> newCast = new ArrayList<>();
         newVendor.get().forEach(castId -> newCast.add(this.castRepository.findById(castId).get()));
         tmp.setInvolvedCast(newCast);
 
         this.movieRepository.save(tmp);
-        return this.movieMapper.movieToMovieDTO(tmp);
+        return this.movieMapper.movieToMovieDTO(tmp);*/
+        return null;
     }
 
     @Override

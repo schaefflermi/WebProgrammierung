@@ -20,6 +20,8 @@ public class CreditcardtransactionDTO {
     private LocalDate tdate;
     private final double TFEE = 0.02;
 
+
+
     public CreditcardtransactionDTO(UUID tUuid, String description, double sum, boolean status, LocalDate tdate){
         this.tUuid = tUuid;
         this.description = description;

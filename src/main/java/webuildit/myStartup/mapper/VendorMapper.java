@@ -10,7 +10,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface VendorMapper {
-    @Mapping(target = "")
+
     VendorDTO awardToAwardDTO(Vendor vendor);
 
     List<VendorDTO> awardsToAwardsDTO(List<Vendor> vendor);
