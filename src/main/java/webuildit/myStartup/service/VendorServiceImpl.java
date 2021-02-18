@@ -48,7 +48,6 @@ public class VendorServiceImpl implements VendorService {
 
     @Override
     public String getFeeForVendor(UUID uuid) {
-        UUID vendorUuid = uuid;
         // Aktuelles Datum beschaffen
         LocalDate date1 = LocalDate.now();
         // Aktuellen Monat beschaffen
@@ -61,8 +60,8 @@ public class VendorServiceImpl implements VendorService {
         final double[] sum = {0};
 
         System.out.println("--------------- TEST AUSGABE -------------");
-        this.transactionRepository.findSumByVendor_vUuidAndStatusIsTrueAndTdateBetween(vendorUuid, LocalDate.of(dateYear1, dateMonth1, 1), LocalDate.of(dateYear1, dateMonth1,actualtDayOfMonth)).
-                forEach(creditcardtransaction -> sum[0] = sum[0] + creditcardtransaction.getSum());
+        this.transactionRepository.findSumByVendor_vUuidAndStatusIsTrueAndTdateBetween(uuid, LocalDate.of(dateYear1, dateMonth1, 1), LocalDate.of(dateYear1, dateMonth1,actualtDayOfMonth)).
+                forEach(creditcardtransaction -> sum[0] = sum[0] + creditcardtransaction.getSum() + creditcardtransaction.getSum() * creditcardtransaction.getTFEE());
 
         return String.valueOf(sum[0]);
     }

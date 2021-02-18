@@ -23,7 +23,7 @@ public class Creditcardtransaction {
     private double sum;
     private boolean status;
     private LocalDate tdate;
-    private static final float TFEE = 0.02f;
+    private final double TFEE = 0.02;
 
 
     // 1:n Beziehung zu Kunde
