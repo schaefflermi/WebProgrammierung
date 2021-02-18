@@ -58,12 +58,12 @@ public class ManualTestBean {
         Customer customer_4 = new Customer("Rafael Fogel", "Wiesenstraße 13 76684 Östringen", 60000);
         Customer customer_5 = new Customer ("Andreas Müller", "Merianstraße 7 69168 Wiesloch", 130000);
         Customer customer_6 = new Customer("Fail Ure", "Can't do it 5 34921 Nothappening", 0);
-        Vendor v1 = new Vendor(1,"Thyssen Schachtbau Holding GmbH", "Sandstraße 107/135, 45473 Mülheim an der Ruhr", Classification.BERGBAU);
-        Vendor v2 = new Vendor(2,"ECORA GmbH", "Am Blätterrangen 2 95659 Arzberg", Classification.LANDFORSTWIRTSCHAFT);
-        Vendor v3 = new Vendor( 3, "SAP SE", "Dietmar-Hopp-Allee 16 69190 Walldorf", Classification.DIENSTLEISTUNGEN);
-        Vendor v4 = new Vendor( 4, "ATLAS Informationssysteme GmbH", "Carl-Reichstein-Straße 7/9 14770 Brandenburg an der Havel", Classification.DIENSTLEISTUNGEN);
-        Vendor v5 = new Vendor(5, "IFB Ingenieure GmbH", "Mozartstraße 19/2, 73663 Berglen", Classification.BAUGEWERBE);
-        Vendor v6 = new Vendor(6, "GOLDBECK GmbH", "Rosengartenweg 3, 67281 Kirchheim an der Weinstraße", Classification.BAUGEWERBE);
+        Vendor v1 = new Vendor("Thyssen Schachtbau Holding GmbH", "Sandstraße 107/135, 45473 Mülheim an der Ruhr", Classification.BERGBAU);
+        Vendor v2 = new Vendor("ECORA GmbH", "Am Blätterrangen 2 95659 Arzberg", Classification.LANDFORSTWIRTSCHAFT);
+        Vendor v3 = new Vendor( "SAP SE", "Dietmar-Hopp-Allee 16 69190 Walldorf", Classification.DIENSTLEISTUNGEN);
+        Vendor v4 = new Vendor( "ATLAS Informationssysteme GmbH", "Carl-Reichstein-Straße 7/9 14770 Brandenburg an der Havel", Classification.DIENSTLEISTUNGEN);
+        Vendor v5 = new Vendor("IFB Ingenieure GmbH", "Mozartstraße 19/2, 73663 Berglen", Classification.BAUGEWERBE);
+        Vendor v6 = new Vendor("GOLDBECK GmbH", "Rosengartenweg 3, 67281 Kirchheim an der Weinstraße", Classification.BAUGEWERBE);
         Creditcardtransaction c1 = new Creditcardtransaction("Peter Müller buys some cole", 189, true,  LocalDate.of(2021,02,6));
         Creditcardtransaction c2 = new Creditcardtransaction("Anja Beck buys from an agriculture company", 75, true,  LocalDate.of(2021,01,20));
         Creditcardtransaction c3 = new Creditcardtransaction("Tony Smith has a little company using SAP software and buys it in his own name", 15000, true, LocalDate.of(2021, 01, 22));
@@ -165,7 +165,7 @@ public class ManualTestBean {
         // Gibt alle Werte der ersten Aufgabe zurück
         vendorService.getStatisticsAboutMonth(2,2021);
         log.info(String.valueOf(transactionRepository.findAllByVendorandCurrentMonth(v6.getVUuid())));
-        log.info("-------------Aufgabe 1.2 -------------");
+        log.info("-------------Aufgabe 1.1 -------------");
         log.info(vendorService.getFeeForVendor(v6.getVUuid()));
 
 

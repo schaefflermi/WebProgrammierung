@@ -18,7 +18,6 @@ public class Vendor {
     @Id
     @Column(name = "UUID",  unique = true, nullable = false)
     private UUID vUuid = UUID.randomUUID();
-   //private long vId;
     private String vName;
     private String vAddress;
     @Enumerated(EnumType.STRING)
@@ -32,7 +31,7 @@ public class Vendor {
 
 
     // Konstruktor
-    public Vendor(long vId,String vName, String vAddress, Classification classification){
+    public Vendor(String vName, String vAddress, Classification classification){
         this.vName=vName;
         this.vAddress=vAddress;
         this.classification=classification;
