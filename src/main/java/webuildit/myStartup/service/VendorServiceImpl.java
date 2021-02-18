@@ -2,10 +2,15 @@ package webuildit.myStartup.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import webuildit.myStartup.dto.VendorDTO;
+import webuildit.myStartup.mapper.VendorMapper;
+import webuildit.myStartup.model.Creditcardtransaction;
+import webuildit.myStartup.model.Vendor;
 import webuildit.myStartup.repository.CustomerRepository;
 import webuildit.myStartup.repository.TransactionRepository;
 import webuildit.myStartup.repository.VendorRepository;
 
+import javax.transaction.Transactional;
 import java.time.*;
 import java.util.*;
 
@@ -14,12 +19,14 @@ public class VendorServiceImpl implements VendorService {
     TransactionRepository transactionRepository;
     VendorRepository vendorRepository;
     CustomerRepository customerRepository;
+    VendorMapper vendorMapper;
 
     @Autowired
-    public VendorServiceImpl(TransactionRepository transactionRepository, VendorRepository vendorRepository, CustomerRepository customerRepository){
+    public VendorServiceImpl(TransactionRepository transactionRepository, VendorRepository vendorRepository, CustomerRepository customerRepository, VendorMapper vendorMapper){
         this.transactionRepository = transactionRepository;
         this.vendorRepository=vendorRepository;
         this.customerRepository=customerRepository;
+        this.vendorMapper = vendorMapper;
 
     }
     // this method calculate
@@ -64,5 +71,45 @@ public class VendorServiceImpl implements VendorService {
                 forEach(creditcardtransaction -> sum[0] = sum[0] + creditcardtransaction.getSum() + creditcardtransaction.getSum() * creditcardtransaction.getTFEE());
 
         return String.valueOf(sum[0]);
+    }
+
+    @Override
+    public VendorDTO addVendor(VendorDTO vendorDTO) {
+        Vendor tmp = new Vendor(vendorDTO.getVName(), vendorDTO.getVAddress(), vendorDTO.getClassifictation());
+        this.vendorRepository.save(tmp);
+        return new VendorDTO(tmp.getVUuid(), tmp.getVName(), tmp.getVAddress(), tmp.getClassification());
+    }
+
+    @Override
+    public VendorDTO getVendorByUUID(UUID vUuid) {
+        Vendor tmp = this.vendorRepository.findById(vUuid).get();
+        return new VendorDTO(tmp.getVUuid(), tmp.getVName(), tmp.getVAddress(), tmp.getClassification(), null);
+    }
+
+    @Override
+    public List<VendorDTO> getAllVendors() {
+       /* List<String> result = new LinkedList<>();
+        List<Vendor> tmp = this.vendorRepository.findAll();
+        tmp.forEach(vendor -> result.add(vendor.getTitle()));
+        return result;
+        }*/
+        return null;
+    }
+    @Transactional
+    @Override
+    public VendorDTO updateVendor(VendorDTO newVendor) {
+        Vendor tmp = this.;
+
+        List<Creditcardtransaction> newCast = new ArrayList<>();
+        newVendor.get().forEach(castId -> newCast.add(this.castRepository.findById(castId).get()));
+        tmp.setInvolvedCast(newCast);
+
+        this.movieRepository.save(tmp);
+        return this.movieMapper.movieToMovieDTO(tmp);
+    }
+
+    @Override
+    public void removeVendorById(UUID vUuid) {
+        this.vendorRepository.deleteById(vUuid);
     }
 }

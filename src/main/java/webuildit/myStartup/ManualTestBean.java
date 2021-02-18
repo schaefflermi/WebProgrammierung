@@ -4,11 +4,8 @@ package webuildit.myStartup;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
-import webuildit.myStartup.controller.CCTController;
-import webuildit.myStartup.controller.CCTControllerImpl;
+import webuildit.myStartup.controller.CreditcardtransactionControllerImpl;
 import webuildit.myStartup.model.Classification;
 import webuildit.myStartup.model.Creditcardtransaction;
 import webuildit.myStartup.model.Customer;
@@ -17,11 +14,8 @@ import webuildit.myStartup.repository.CustomerRepository;
 import webuildit.myStartup.repository.TransactionRepository;
 import webuildit.myStartup.repository.VendorRepository;
 import webuildit.myStartup.service.VendorService;
-import webuildit.myStartup.service.VendorServiceImpl;
 
-import java.text.DateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Component
@@ -31,14 +25,14 @@ public class ManualTestBean {
     // Vorsicht diese Klasse ist nur für Übungszwecke,
     // sie sollte nie in einer produktiven Applikation sein.
 
-    CCTControllerImpl CCTControllerImpl;
+    CreditcardtransactionControllerImpl CCTControllerImpl;
     TransactionRepository transactionRepository;
     VendorRepository vendorRepository;
     VendorService vendorService;
     CustomerRepository customerRepository;
 
 
-    ManualTestBean(CCTControllerImpl CCTControllerImpl, TransactionRepository transactionRepository, VendorRepository vendorRepository, VendorService vendorService, CustomerRepository customerRepository){
+    ManualTestBean(CreditcardtransactionControllerImpl CCTControllerImpl, TransactionRepository transactionRepository, VendorRepository vendorRepository, VendorService vendorService, CustomerRepository customerRepository){
         this.CCTControllerImpl = CCTControllerImpl;
         this.transactionRepository = transactionRepository;
         this.vendorRepository = vendorRepository;

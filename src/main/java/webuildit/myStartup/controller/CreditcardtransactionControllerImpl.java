@@ -2,19 +2,14 @@ package webuildit.myStartup.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import webuildit.myStartup.model.Creditcardtransaction;
 import webuildit.myStartup.repository.TransactionRepository;
-import webuildit.myStartup.service.VendorService;
-
-import java.util.List;
-import java.util.UUID;
 
 @Controller
-public class CCTControllerImpl implements CCTController {
+public class CreditcardtransactionControllerImpl implements CreditcardtransactionController {
      TransactionRepository transactionRepository;
 
     @Autowired
-    public CCTControllerImpl(){
+    public CreditcardtransactionControllerImpl(){
 
     }
 }
