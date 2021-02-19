@@ -11,13 +11,13 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface VendorMapper {
 
-    VendorDTO awardToAwardDTO(Vendor vendor);
+    VendorDTO vendorToVendorDTO(Vendor vendor);
 
-    List<VendorDTO> awardsToAwardsDTO(List<Vendor> vendor);
+    List<VendorDTO> vendorsToVendorsDTO(List<Vendor> vendor);
 
     @InheritInverseConfiguration
-    Vendor awardDTOToAward(VendorDTO awardDTO);
+    Vendor vendorDTOToVendor(VendorDTO awardDTO);
 
-    List<Vendor> awardDTOsToAwards(List<VendorDTO> awardDTOToList);
+    List<Vendor> vendorDTOsToVendors(List<VendorDTO> awardDTOToList);
 
 }

@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import webuildit.myStartup.model.Classification;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.util.List;
 import java.util.UUID;
 @Getter
@@ -15,16 +17,16 @@ public class VendorDTO {
     private UUID vUuid;
     private String vName;
     private String vAddress;
-    private Classification classifictation;
+    @Enumerated(EnumType.STRING)
+    private Classification classification;
 
-    private List<CreditcardtransactionDTO> creditcardtransactions;
 
-    public VendorDTO(UUID vUuid, String vName, String vAddress, Classification classification, List<CreditcardtransactionDTO> creditcardtransactions){
+
+    public VendorDTO(UUID vUuid, String vName, String vAddress, Classification classification){
         this.vUuid = vUuid;
         this.vName = vName;
         this.vAddress = vAddress;
-        this.classifictation = classification;
-        this.creditcardtransactions = creditcardtransactions;
+        this.classification = classification;
 
     }
 }
