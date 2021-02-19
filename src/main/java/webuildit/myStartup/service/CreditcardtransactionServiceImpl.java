@@ -1,13 +1,16 @@
 package webuildit.myStartup.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import webuildit.myStartup.dto.CreditcardtransactionDTO;
 import webuildit.myStartup.dto.VendorDTO;
+import webuildit.myStartup.mapper.CreditcardtransactionMapper;
 import webuildit.myStartup.model.Creditcardtransaction;
 import webuildit.myStartup.model.Vendor;
 import webuildit.myStartup.repository.TransactionRepository;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -20,9 +23,11 @@ import java.util.UUID;
 public class CreditcardtransactionServiceImpl implements CreditcardtransactionService{
 
     TransactionRepository transactionRepository;
+    CreditcardtransactionMapper creditcardtransactionMapper;
 
-    public CreditcardtransactionServiceImpl(TransactionRepository transactionRepository){
+    public CreditcardtransactionServiceImpl(TransactionRepository transactionRepository, CreditcardtransactionMapper creditcardtransactionMapper){
         this.transactionRepository = transactionRepository;
+        this.creditcardtransactionMapper = creditcardtransactionMapper;
     }
 
     @Override
@@ -49,10 +54,11 @@ public class CreditcardtransactionServiceImpl implements CreditcardtransactionSe
     }
 
     @Override
+    @Transactional
     public CreditcardtransactionDTO updateCreditcardtransaction(CreditcardtransactionDTO creditcardtransactionDTO) {
-        Creditcardtransaction tmp = new Creditcardtransaction(creditcardtransactionDTO.getDescription(), creditcardtransactionDTO.getSum(), creditcardtransactionDTO.isStatus(), creditcardtransactionDTO.getTdate());
+        Creditcardtransaction tmp = this.creditcardtransactionMapper.creditcardtransactionDTOToCreditcardtransaction(creditcardtransactionDTO);
         this.transactionRepository.save(tmp);
-        return new CreditcardtransactionDTO(tmp.getTUuid(), tmp.getDescription(), tmp.getSum(), tmp.isStatus(), tmp.getTdate());
+        return this.creditcardtransactionMapper.creditcardtransactionToCreditcardtransactionDTO(tmp);
     }
 
     @Override
