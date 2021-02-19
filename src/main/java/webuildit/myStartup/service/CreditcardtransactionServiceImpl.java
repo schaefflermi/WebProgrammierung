@@ -1,13 +1,9 @@
 package webuildit.myStartup.service;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 import webuildit.myStartup.dto.CreditcardtransactionDTO;
-import webuildit.myStartup.dto.VendorDTO;
 import webuildit.myStartup.mapper.CreditcardtransactionMapper;
 import webuildit.myStartup.model.Creditcardtransaction;
-import webuildit.myStartup.model.Vendor;
 import webuildit.myStartup.repository.TransactionRepository;
 
 import javax.transaction.Transactional;

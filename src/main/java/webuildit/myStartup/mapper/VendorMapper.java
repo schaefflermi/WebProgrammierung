@@ -16,8 +16,8 @@ public interface VendorMapper {
     List<VendorDTO> vendorsToVendorsDTO(List<Vendor> vendor);
 
     @InheritInverseConfiguration
-    Vendor vendorDTOToVendor(VendorDTO awardDTO);
+    Vendor vendorDTOToVendor(VendorDTO vendorDTO);
 
-    List<Vendor> vendorDTOsToVendors(List<VendorDTO> awardDTOToList);
+    List<Vendor> vendorDTOsToVendors(List<VendorDTO> vendorDTOToList);
 
 }

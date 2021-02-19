@@ -18,15 +18,11 @@ public class CustomerDTO {
     private int netIncome;
 
 
-    private List<CreditcardtransactionDTO> creditcardtransactions;
-
-    public CustomerDTO(UUID cUuid, String cName, String cAddress, int netIncome, List<CreditcardtransactionDTO> creditcardtransactions){
+    public CustomerDTO(UUID cUuid, String cName, String cAddress, int netIncome){
         this.cUuid = cUuid;
         this.cName = cName;
         this.cAddress = cAddress;
         this.netIncome = netIncome;
-        this.creditcardtransactions = creditcardtransactions;
-
     }
 
 }
