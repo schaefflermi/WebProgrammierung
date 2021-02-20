@@ -20,16 +20,11 @@ import static org.hibernate.loader.Loader.SELECT;
 public interface TransactionRepository extends JpaRepository<Creditcardtransaction, UUID> {
 
   //Aufgabe 1.1 :Bei Eingabe der Id eines Verkäufers, der abzurechnende Betrag für diesen für den aktuellen Monat zurückgegeben wird.
-    //Nochmal überprüfen bei daten status = false.... kam zu einem Fehler -> hat bei mir funktioniert
-    @Query("Select SUM(c.sum) * c.TFEE from Creditcardtransaction c where year(c.tdate) = year(CURRENT_DATE) AND month(c.tdate) = month(CURRENT_DATE) and c.status=true and c.vendor.vUuid = ?1")
-    Double findAllByVendorandCurrentMonth(UUID vUuid);
+  List<Creditcardtransaction> findSumByVendor_vUuidAndStatusIsTrueAndTdateBetween(UUID uuid, LocalDate date1, LocalDate date2);
 
-    //Aufgabe 1.2 neu
+  //Aufgabe 1.2 : Die Einnahmen des Starups für einen konkreten Monat
     @Query("Select sum(c.sum) * c.TFEE from Creditcardtransaction c where month(c.tdate) = :param1 and year(c.tdate) = :param2 and c.status=true")
-    Double findSumOfAllTransactionsByDay(@Param("param1")int month, @Param("param2")int year);
-
-    //Aufgabe 1.2 als abgeleitete Abfrage
- //   List<Creditcardtransaction> findSumByTdateBetweenAndVendorvuuidAndStatusIsTrue(LocalDate date1, LocalDate date2, UUID uuid);
+    String findSumOfAllTransactionsByDay(@Param("param1")int month, @Param("param2")int year);
 
     // für Aufgabe 1.5 - Einnahmen des aktuellen Monats
     @Query("Select SUM(c.sum) * c.TFEE from Creditcardtransaction c where month(c.tdate) = :param1 and year(c.tdate) = :param2 and c.status=true and c.tdate <= CURRENT_TIMESTAMP ")
@@ -39,6 +34,5 @@ public interface TransactionRepository extends JpaRepository<Creditcardtransacti
     @Query("Select SUM(c.sum) * c.TFEE from Creditcardtransaction c where month(c.tdate) = :param1 and year(c.tdate) = :param2 and c.status=true and c.tdate <= :param3")
     Double findSumOfAllTransactionsByPreviousMonth3(@Param("param1")int month, @Param("param2")int year, @Param("param3") LocalDate date);
 
-   // List<Creditcardtransaction>findTUuidByVendor_id(UUID uuid);
-    List<Creditcardtransaction> findSumByVendor_vUuidAndStatusIsTrueAndTdateBetween(UUID uuid, LocalDate date1, LocalDate date2);
+
 }

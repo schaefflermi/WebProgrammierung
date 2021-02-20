@@ -63,4 +63,10 @@ public class CustomerServiceImpl implements CustomerService{
 
     }
 
+    @Override
+    public List<String> findAllCustomerWithFiveFailedTransaction(int month, int year) {
+        List<String> tmp = customerRepository.findAllCustomerWithFiveFailedTransaction(month, year);
+        return tmp;
+    }
+
 }

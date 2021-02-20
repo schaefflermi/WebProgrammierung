@@ -15,5 +15,7 @@ public interface CustomerController {
     List<CustomerDTO> getAllCustomers();
     CustomerDTO updateCustomer(UUID cUuid, CustomerDTO customerDTO);
     void removeCustomerById(UUID cUuid);
+    List<String> findAllCustomerWithFiveFailedTransaction(int month, int year);
+
 
 }

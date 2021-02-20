@@ -70,4 +70,11 @@ public class CustomerControllerImpl implements CustomerController{
         }
     }
 
+    @Override
+    @GetMapping("/1.4/{month}/{year}")
+    public List<String> findAllCustomerWithFiveFailedTransaction(@PathVariable ("month") int month, @PathVariable("year") int year) {
+            List<String> tmp = customerService.findAllCustomerWithFiveFailedTransaction(month, year);
+            return tmp;
+    }
+
 }

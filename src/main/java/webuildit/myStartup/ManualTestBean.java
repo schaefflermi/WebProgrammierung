@@ -57,8 +57,10 @@ public class ManualTestBean {
         Vendor v3 = new Vendor( "SAP SE", "Dietmar-Hopp-Allee 16 69190 Walldorf", Classification.DIENSTLEISTUNGEN);
         Vendor v4 = new Vendor( "ATLAS Informationssysteme GmbH", "Carl-Reichstein-Straße 7/9 14770 Brandenburg an der Havel", Classification.DIENSTLEISTUNGEN);
         Vendor v5 = new Vendor("IFB Ingenieure GmbH", "Mozartstraße 19/2, 73663 Berglen", Classification.BAUGEWERBE);
-        Vendor v6 = new Vendor("GOLDBECK GmbH", "Rosengartenweg 3, 67281 Kirchheim an der Weinstraße", Classification.BAUGEWERBE);
-        Creditcardtransaction c1 = new Creditcardtransaction("Peter Müller buys some cole", 189, true,  LocalDate.of(2021,02,6));
+        Vendor v6 = new Vendor("GOLDBECK GmbH", "Rosengartenweg 3, 67281 Kirchheim an der Weinstraße", Classification.ENERGIEVERSORGUNG);
+        Vendor v7 = new Vendor("Thyssen Schachtbau Holding GmbH", "Sandstraße 107/135, 45473 Mülheim an der Ruhr", Classification.GESUNDHEITSSOZIALWESEN);
+
+        Creditcardtransaction c1 = new Creditcardtransaction("Peter Müller buys some cole", 189, true,  LocalDate.of(2020,02,6));
         Creditcardtransaction c2 = new Creditcardtransaction("Anja Beck buys from an agriculture company", 75, true,  LocalDate.of(2021,01,20));
         Creditcardtransaction c3 = new Creditcardtransaction("Tony Smith has a little company using SAP software and buys it in his own name", 15000, true, LocalDate.of(2021, 01, 22));
         Creditcardtransaction c4 = new Creditcardtransaction("Fogel buys some house related stuff", 1050, true, LocalDate.of(2021, 01, 02));
@@ -67,7 +69,7 @@ public class ManualTestBean {
         Creditcardtransaction c7 = new Creditcardtransaction("Beck builds a terrasse", 3000, true, LocalDate.of(2021, 02,01));
         Creditcardtransaction c8 = new Creditcardtransaction("Fogel build a garage", 1200, true, LocalDate.of(2020, 04, 15));
         Creditcardtransaction c9 = new Creditcardtransaction("Smith bilds a home", 37058, true, LocalDate.of(2021, 02,16 ));
-        Creditcardtransaction c10 = new Creditcardtransaction("A Müller buys his sister a flat", 30000, true, LocalDate.of(2020, 03, 19));
+        Creditcardtransaction c10 = new Creditcardtransaction("A Müller buys his sister a flat", 30000, true, LocalDate.of(2020, 12, 19));
         Creditcardtransaction c11 = new Creditcardtransaction("fail1", 50, false, LocalDate.of(2020, 04, 19));
         Creditcardtransaction c12 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
         Creditcardtransaction c13 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
@@ -80,6 +82,7 @@ public class ManualTestBean {
         Creditcardtransaction c20 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
         Creditcardtransaction c21 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
         Creditcardtransaction c22 = new Creditcardtransaction("Beck builds a terrasse", 3000, true, LocalDate.of(2021, 02,03));
+
 
 
 
@@ -144,7 +147,7 @@ public class ManualTestBean {
         v3.setTransactions(Arrays.asList(c3));
         v4.setTransactions(Arrays.asList(c4));
         v5.setTransactions(Arrays.asList(c5));
-        v6.setTransactions(Arrays.asList(c6, c7, c8, c9, c10, c22));
+        v6.setTransactions(Arrays.asList(c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c22));
         this.vendorRepository.saveAll(Arrays.asList(v1,v2,v3,v4,v5,v6));
 
         //Ordne den Kunden Transaktionen zu
@@ -158,9 +161,9 @@ public class ManualTestBean {
 
         // Gibt alle Werte der ersten Aufgabe zurück
         vendorService.getStatisticsAboutMonth(2,2021);
-        log.info(String.valueOf(transactionRepository.findAllByVendorandCurrentMonth(v6.getVUuid())));
         log.info("-------------Aufgabe 1.1 -------------");
         log.info(vendorService.getFeeForVendor(v6.getVUuid()));
+       vendorService.compareIncomeBeetweenOneMonth(11,2020);
 
 
 
