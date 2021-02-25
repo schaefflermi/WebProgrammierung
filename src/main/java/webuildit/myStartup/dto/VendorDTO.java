@@ -18,7 +18,7 @@ public class VendorDTO {
     private UUID vUuid;
     private String vName;
     private String vAddress;
-    @NotBlank
+  //  @NotBlank
     @Enumerated(EnumType.STRING)
     private Classification classification;
 

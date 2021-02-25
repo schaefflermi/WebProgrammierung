@@ -6,11 +6,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import webuildit.myStartup.controller.VendorControllerImpl;
 import webuildit.myStartup.dto.VendorDTO;
 import webuildit.myStartup.model.Classification;
-import webuildit.myStartup.model.Vendor;
 import webuildit.myStartup.service.VendorService;
 
 import java.util.Arrays;
@@ -19,9 +18,10 @@ import java.util.UUID;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -72,6 +72,50 @@ public class VendorControllerImplTest {
                 .andDo(print());
         verify(vendorService).getAllVendors();
     }
+
+    // macht der Test so Sinn?
+    @Test
+    public void shouldReturnOneVendor() throws Exception{
+        when(vendorService.getVendorByUUID(any())).thenReturn(vendor1);
+        this.mockMvc.perform(get(controllerPath+"/"+vendor1.getVUuid()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.vuuid", is(vendor1.getVUuid().toString())))
+                .andExpect(jsonPath("$.vname", is(vendor1.getVName())))
+                .andExpect(jsonPath("$.vaddress", is(vendor1.getVAddress())))
+                .andExpect(jsonPath("$.classification", is(vendor1.getClassification().toString())))
+                .andDo(print());
+        verify(vendorService).getVendorByUUID(any());
+    }
+
+    @Test
+    public void shouldAddVendor() throws Exception{
+        when(vendorService.addVendor(any())).thenReturn((vendor2));
+
+        this.mockMvc.perform(post(controllerPath)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(vendor2)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.vuuid", is(vendor2.getVUuid().toString())));
+        verify(vendorService).addVendor(any());
+    }
+
+    @Test
+    public void shouldUpdateVendor() throws Exception{
+        when(vendorService.updateVendor(any())).thenReturn(vendor3);
+        this.mockMvc.perform(put(controllerPath+"/"+vendor3.getVUuid())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(vendor3)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.vuuid", is(vendor3.getVUuid().toString())));
+        verify(vendorService).updateVendor(any());
+    }
+
+    @Test
+    public void shouldDeleteVendor() throws Exception{
+            mockMvc.perform(delete(controllerPath+"/"+vendor2.getVUuid()))
+                    .andExpect(status().isOk());
+    }
+
 
 
 }
