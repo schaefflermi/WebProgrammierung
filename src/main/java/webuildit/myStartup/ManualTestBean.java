@@ -13,6 +13,7 @@ import webuildit.myStartup.model.Vendor;
 import webuildit.myStartup.repository.CustomerRepository;
 import webuildit.myStartup.repository.TransactionRepository;
 import webuildit.myStartup.repository.VendorRepository;
+import webuildit.myStartup.service.StartupService;
 import webuildit.myStartup.service.VendorService;
 
 import java.time.LocalDate;
@@ -30,14 +31,16 @@ public class ManualTestBean {
     VendorRepository vendorRepository;
     VendorService vendorService;
     CustomerRepository customerRepository;
+    StartupService startupService;
 
 
-    ManualTestBean(CreditcardtransactionControllerImpl CCTControllerImpl, TransactionRepository transactionRepository, VendorRepository vendorRepository, VendorService vendorService, CustomerRepository customerRepository){
+    ManualTestBean(CreditcardtransactionControllerImpl CCTControllerImpl, TransactionRepository transactionRepository, VendorRepository vendorRepository, VendorService vendorService, CustomerRepository customerRepository, StartupService startupService){
         this.CCTControllerImpl = CCTControllerImpl;
         this.transactionRepository = transactionRepository;
         this.vendorRepository = vendorRepository;
         this.vendorService = vendorService;
         this.customerRepository = customerRepository;
+        this.startupService = startupService;
 
 
     }
@@ -163,7 +166,8 @@ public class ManualTestBean {
         vendorService.getStatisticsAboutMonth(2,2021);
         log.info("-------------Aufgabe 1.1 -------------");
         log.info(vendorService.getFeeForVendor(v6.getVUuid()));
-       vendorService.compareIncomeBeetweenOneMonth(11,2020);
+//        log.info(startupService.compareIncomeBeetweenOneMonth());
+        log.info(startupService.getStatic(2,2021).getDifference());
 
 
 

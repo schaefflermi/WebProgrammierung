@@ -1,6 +1,7 @@
 package webuildit.myStartup.controller;
 
 import webuildit.myStartup.dto.VendorDTO;
+import webuildit.myStartup.model.Classification;
 
 import java.util.Collection;
 import java.util.List;
@@ -17,6 +18,6 @@ public interface VendorController {
     String findSumOfAllTransactionsByDay(int month, int year);
     List<String> findTop3Desc(int month, int year);
     List<String> findAllTop3Asc(int month, int year);
-    String compareIncomeBeetweenOneMonth(int month, int year);
+//    String compareIncomeBeetweenOneMonth(int month, int year);
     String getStatisticForOneMonth(int month, int year);
 }

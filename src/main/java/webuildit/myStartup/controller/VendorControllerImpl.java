@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import webuildit.myStartup.dto.VendorDTO;
+import webuildit.myStartup.model.Classification;
 import webuildit.myStartup.service.VendorService;
 import io.swagger.v3.oas.annotations.Operation;
 
@@ -164,12 +165,13 @@ public class VendorControllerImpl implements VendorController{
         return tmp;
     }
 
-    @Override
-    @GetMapping("/1.5/{month}/{year}")
-    public String compareIncomeBeetweenOneMonth(@PathVariable("month") int month, @PathVariable("year") int year) {
-        String tmp = String.valueOf(vendorService.compareIncomeBeetweenOneMonth(month, year));
-        return tmp;
-    }
+//    @Override
+//    @GetMapping("/1.5/{month}/{year}")
+//    public String compareIncomeBeetweenOneMonth(@PathVariable("month") int month, @PathVariable("year") int year) {
+//        String tmp = String.valueOf(vendorService.compareIncomeBeetweenOneMonth(month, year));
+//        return tmp;
+//    }
+
     @Override
     @GetMapping("/2/{month}/{year}")
     public String getStatisticForOneMonth(@PathVariable("month") int month, @PathVariable("year") int year) {
@@ -179,8 +181,8 @@ public class VendorControllerImpl implements VendorController{
         String tmp = "Statistik für den eingegeben Monat \nSumme: " + this.findSumOfAllTransactionsByDay(month, year) + "\n"
                 + "Die 3 Gewerbe mit den höchsten Umsatz: " + this.findTop3Desc(month, year) + "\n"
                 + "Die 3 Gewerbe mit den niedrigsten Umsatz: " + this.findAllTop3Asc(month, year) + "\n"
-                + "Kunden mit 5 fehlgeschlagenen Transaktionen: " + customerController.findAllCustomerWithFiveFailedTransaction(month, year) + "\n"
-                + "Differenz zum Vormonat: " + this.compareIncomeBeetweenOneMonth(month, year);
+                + "Kunden mit 5 fehlgeschlagenen Transaktionen: " + customerController.findAllCustomerWithFiveFailedTransaction(month, year) + "\n";
+//                + "Differenz zum Vormonat: " + this.compareIncomeBeetweenOneMonth(month, year);
             return tmp;
         } catch (NullPointerException exception){
             throw new NullPointerException();

@@ -2,12 +2,12 @@ package webuildit.myStartup.service;
 
 import org.springframework.data.repository.query.Param;
 import webuildit.myStartup.dto.VendorDTO;
+import webuildit.myStartup.model.Classification;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface VendorService {
-    String compareIncomeBeetweenOneMonth(int month, int year);
     void getStatisticsAboutMonth(int month, int year);
     String getFeeForVendor(UUID uuid);
     VendorDTO addVendor(VendorDTO vendorDTO);
