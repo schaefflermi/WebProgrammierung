@@ -36,8 +36,12 @@ public class VendorControllerImpl implements VendorController{
     @Override
     @GetMapping("/{vuuid}")
     public VendorDTO getVendorByUUID(@PathVariable("vuuid") UUID vUuid) {
+        try{
+            return this.vendorService.getVendorByUUID(vUuid);
+        } catch(NoSuchElementException noSuchElementException){
+            throw new NoSuchElementException("Der Verkäufer mit dieser UUID existiert nicht.");
+        }
 
-        return this.vendorService.getVendorByUUID(vUuid);
     }
 
     @GetMapping
@@ -68,6 +72,13 @@ public class VendorControllerImpl implements VendorController{
         }
 
     }
+
+
+    // bis hier
+
+
+
+
 
     @Override
     @GetMapping("/1.1/{vuuid}")

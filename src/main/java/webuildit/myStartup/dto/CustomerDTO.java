@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import webuildit.myStartup.model.Creditcardtransaction;
 
+import javax.validation.constraints.Min;
 import java.util.List;
 import java.util.UUID;
 @Getter
@@ -15,6 +16,7 @@ public class CustomerDTO {
     private UUID cUuid;
     private String cName;
     private String cAddress;
+    @Min(0)
     private int netIncome;
 
 

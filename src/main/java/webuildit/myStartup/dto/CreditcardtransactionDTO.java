@@ -6,6 +6,8 @@ import lombok.Setter;
 import webuildit.myStartup.model.Customer;
 import webuildit.myStartup.model.Vendor;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -15,8 +17,14 @@ import java.util.UUID;
 public class CreditcardtransactionDTO {
     private UUID tUuid;
     private String description;
+
+    @Min(0)
+    @NotBlank
     private double sum;
+    @NotBlank
     private boolean status;
+
+    @NotBlank
     private LocalDate tdate;
     private final double TFEE = 0.02;
 
