@@ -73,7 +73,6 @@ public class VendorControllerImplTest {
         verify(vendorService).getAllVendors();
     }
 
-    // macht der Test so Sinn?
     @Test
     public void shouldReturnOneVendor() throws Exception{
         when(vendorService.getVendorByUUID(any())).thenReturn(vendor1);
@@ -90,7 +89,6 @@ public class VendorControllerImplTest {
     @Test
     public void shouldAddVendor() throws Exception{
         when(vendorService.addVendor(any())).thenReturn((vendor2));
-
         this.mockMvc.perform(post(controllerPath)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(vendor2)))
@@ -114,6 +112,7 @@ public class VendorControllerImplTest {
     public void shouldDeleteVendor() throws Exception{
             mockMvc.perform(delete(controllerPath+"/"+vendor2.getVUuid()))
                     .andExpect(status().isOk());
+        verify(vendorService).removeVendorById(any());
     }
 
 

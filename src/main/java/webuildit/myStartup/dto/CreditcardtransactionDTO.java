@@ -19,12 +19,12 @@ public class CreditcardtransactionDTO {
     private String description;
 
     @Min(0)
-    @NotBlank
+    //@NotBlank
     private double sum;
-    @NotBlank
+   // @NotBlank
     private boolean status;
 
-    @NotBlank
+  //  @NotBlank
     private LocalDate tdate;
     private final double TFEE = 0.02;
 
