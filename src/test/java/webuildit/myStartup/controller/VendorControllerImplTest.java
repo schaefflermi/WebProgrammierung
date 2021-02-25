@@ -13,6 +13,7 @@ import webuildit.myStartup.model.Classification;
 import webuildit.myStartup.model.Vendor;
 import webuildit.myStartup.service.VendorService;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -53,6 +54,7 @@ public class VendorControllerImplTest {
         vendor1 = new VendorDTO(UUID.fromString("6391b4d2-24d3-4991-840d-898c28169745"), "Thyssen Schachtbau Holding GmbH", "Sandstraße 107/135, 45473 Mülheim an der Ruhr", Classification.BERGBAU);
         vendor2 = new VendorDTO(UUID.fromString("d440b7ad-5e0d-4f17-9fac-aa506e863f09"), "ECORA GmbH", "Am Blätterrangen 2 95659 Arzberg", Classification.LANDFORSTWIRTSCHAFT);
         vendor3 = new VendorDTO(UUID.fromString("f624c5b1-6b40-468a-810f-f47600a8b1dd"), "SAP SE", "Dietmar-Hopp-Allee 16 69190 Walldorf", Classification.DIENSTLEISTUNGEN);
+        this.vendorList = Arrays.asList(vendor1, vendor2, vendor3);
     }
 
     @Test
@@ -61,6 +63,11 @@ public class VendorControllerImplTest {
 
         this.mockMvc.perform(get(controllerPath))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.*", hasSize(3)))
+                .andExpect(jsonPath("$[0].vuuid", is(vendor1.getVUuid().toString())))
+                .andExpect(jsonPath("$[0].vname", is(vendor1.getVName())))
+                .andExpect(jsonPath("$[0].vaddress", is(vendor1.getVAddress())))
+                .andExpect(jsonPath("$[0].classification", is(vendor1.getClassification().toString())))
 
                 .andDo(print());
         verify(vendorService).getAllVendors();
