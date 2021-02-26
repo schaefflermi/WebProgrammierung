@@ -49,8 +49,9 @@ public class StartupServiceImpl implements StartupService{
     public Startup getStatic(int month, int year){
         Startup s1 = new Startup();
         s1.setRevenue(transactionRepository.findSumOfAllTransactionsByDay(month, year));
-        s1.setClassificationsUp(vendorRepository.findAllTop3Asc(month, year));
-        s1.setClassificationsDown(vendorRepository.findTop3Desc(month, year));
+        s1.setClassificationsUp(String.valueOf(vendorRepository.findAllTop3Asc(month, year)));
+        s1.setClassificationsDown(String.valueOf(vendorRepository.findTop3Desc(month, year)));
+        s1.setCustomers(String.valueOf(customerRepository.findAllCustomerWithFiveFailedTransaction(month, year)));
         s1.setDifference(this.compareIncomeBeetweenOneMonth(month, year));
 
         return s1;

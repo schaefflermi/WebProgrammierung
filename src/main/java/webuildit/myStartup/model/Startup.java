@@ -20,12 +20,12 @@ public class Startup {
     private UUID sUuid = UUID.randomUUID();
 
     private String revenue;
-    private List<String> classificationsDown;
-    private List<String> classificationsUp;
-    private List<Customer> customers;
+    private String classificationsDown;
+    private String classificationsUp;
+    private String customers;
     private String difference;
 
-    public Startup(UUID sUuid, String revenue, List<String> classificationsDown, List<String> classificationsUp, List<Customer> customers, String difference){
+    public Startup(UUID sUuid, String revenue, String classificationsDown, String classificationsUp, String customers, String difference){
         this.sUuid = sUuid;
         this.revenue = revenue;
         this.classificationsDown = classificationsDown;

@@ -30,7 +30,7 @@ public interface TransactionRepository extends JpaRepository<Creditcardtransacti
     @Query("Select SUM(c.sum) * c.TFEE from Creditcardtransaction c where month(c.tdate) = :param1 and year(c.tdate) = :param2 and c.status=true and c.tdate <= CURRENT_TIMESTAMP ")
     Double findSumOfAllTransactionsByMonth(@Param("param1")int month, @Param("param2")int year);
 
-    // für Aufgabe 1.5 - Einnahmen des Vormonats
+    // für Aufgabe 1.5 - Einnahmen des Vormonatstran
     @Query("Select SUM(c.sum) * c.TFEE from Creditcardtransaction c where month(c.tdate) = :param1 and year(c.tdate) = :param2 and c.status=true and c.tdate <= :param3")
     Double findSumOfAllTransactionsByPreviousMonth3(@Param("param1")int month, @Param("param2")int year, @Param("param3") LocalDate date);
 
