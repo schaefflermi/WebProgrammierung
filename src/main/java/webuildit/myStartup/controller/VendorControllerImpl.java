@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import webuildit.myStartup.dto.VendorDTO;
-import webuildit.myStartup.model.Classification;
 import webuildit.myStartup.service.VendorService;
 import io.swagger.v3.oas.annotations.Operation;
 
@@ -144,26 +143,26 @@ public class VendorControllerImpl implements VendorController{
         return sum;
     }
 
-    @Override
-    @GetMapping("/1.2/{month}/{year}")
-    public String findSumOfAllTransactionsByDay(@PathVariable("month") int month, @PathVariable("year") int year) {
-        String sum = String.valueOf(vendorService.findSumOfAllTransactionsByDay(month, year));
-        return sum;
-    }
-
-    @Override
-    @GetMapping("/1.3/{month}/{year}")
-    public List<String> findTop3Desc(@PathVariable("month") int month, @PathVariable("year") int year) {
-        List<String> tmp = vendorService.findTop3Desc(month, year);
-        return tmp;
-    }
-
-    @Override
-    @GetMapping("/1.3.1/{month}/{year}")
-    public List<String> findAllTop3Asc(@PathVariable("month") int month, @PathVariable("year") int year) {
-        List<String> tmp = vendorService.findAllTop3Asc(month, year);
-        return tmp;
-    }
+//    @Override
+//    @GetMapping("/1.2/{month}/{year}")
+//    public String findSumOfAllTransactionsByDay(@PathVariable("month") int month, @PathVariable("year") int year) {
+//        String sum = String.valueOf(vendorService.findSumOfAllTransactionsByDay(month, year));
+//        return sum;
+//    }
+//
+//    @Override
+//    @GetMapping("/1.3/{month}/{year}")
+//    public List<String> findTop3Desc(@PathVariable("month") int month, @PathVariable("year") int year) {
+//        List<String> tmp = vendorService.findTop3Desc(month, year);
+//        return tmp;
+//    }
+//
+//    @Override
+//    @GetMapping("/1.3.1/{month}/{year}")
+//    public List<String> findAllTop3Asc(@PathVariable("month") int month, @PathVariable("year") int year) {
+//        List<String> tmp = vendorService.findAllTop3Asc(month, year);
+//        return tmp;
+//    }
 
 //    @Override
 //    @GetMapping("/1.5/{month}/{year}")
@@ -172,22 +171,22 @@ public class VendorControllerImpl implements VendorController{
 //        return tmp;
 //    }
 
-    @Override
-    @GetMapping("/2/{month}/{year}")
-    public String getStatisticForOneMonth(@PathVariable("month") int month, @PathVariable("year") int year) {
-        try {
-
-
-        String tmp = "Statistik für den eingegeben Monat \nSumme: " + this.findSumOfAllTransactionsByDay(month, year) + "\n"
-                + "Die 3 Gewerbe mit den höchsten Umsatz: " + this.findTop3Desc(month, year) + "\n"
-                + "Die 3 Gewerbe mit den niedrigsten Umsatz: " + this.findAllTop3Asc(month, year) + "\n"
-                + "Kunden mit 5 fehlgeschlagenen Transaktionen: " + customerController.findAllCustomerWithFiveFailedTransaction(month, year) + "\n";
-//                + "Differenz zum Vormonat: " + this.compareIncomeBeetweenOneMonth(month, year);
-            return tmp;
-        } catch (NullPointerException exception){
-            throw new NullPointerException();
-
-        }
+//    @Override
+//    @GetMapping("/2/{month}/{year}")
+//    public String getStatisticForOneMonth(@PathVariable("month") int month, @PathVariable("year") int year) {
+//        try {
+//
+//
+//        String tmp = "Statistik für den eingegeben Monat \nSumme: " + this.findSumOfAllTransactionsByDay(month, year) + "\n"
+//                + "Die 3 Gewerbe mit den höchsten Umsatz: " + this.findTop3Desc(month, year) + "\n"
+//                + "Die 3 Gewerbe mit den niedrigsten Umsatz: " + this.findAllTop3Asc(month, year) + "\n"
+//                + "Kunden mit 5 fehlgeschlagenen Transaktionen: " + customerController.findAllCustomerWithFiveFailedTransaction(month, year) + "\n";
+////                + "Differenz zum Vormonat: " + this.compareIncomeBeetweenOneMonth(month, year);
+//            return tmp;
+//        } catch (NullPointerException exception){
+//            throw new NullPointerException();
+//
+//        }
 
 
 
@@ -197,7 +196,7 @@ public class VendorControllerImpl implements VendorController{
         tmp.add(this.compareIncomeBeetweenOneMonth(month, year));*/
 
 
-    }
+//    }
 
 
 }

@@ -96,21 +96,21 @@ public class VendorServiceImpl implements VendorService {
         this.vendorRepository.deleteById(vUuid);
     }
 
-    @Override
-    public String findSumOfAllTransactionsByDay(int month, int year) {
-        String sum = transactionRepository.findSumOfAllTransactionsByDay(month, year);
-        return sum;
-    }
-
-    @Override
-    public List<String> findTop3Desc(int month, int year) {
-        List<String> tmp = vendorRepository.findTop3Desc(month, year);
-        return tmp;
-    }
-
-    @Override
-    public List<String> findAllTop3Asc(int month, int year) {
-        List<String> tmp = vendorRepository.findAllTop3Asc( month, year);
-        return tmp;
-    }
+//    @Override
+//    public String findSumOfAllTransactionsByDay(int month, int year) {
+//        String sum = transactionRepository.findSumOfAllTransactionsByDay(month, year);
+//        return sum;
+//    }
+//
+//    @Override
+//    public List<String> findTop3Desc(int month, int year) {
+//        List<String> tmp = vendorRepository.findTop3Desc(month, year);
+//        return tmp;
+//    }
+//
+//    @Override
+//    public List<String> findAllTop3Asc(int month, int year) {
+//        List<String> tmp = vendorRepository.findAllTop3Asc( month, year);
+//        return tmp;
+//    }
 }

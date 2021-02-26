@@ -1,12 +1,14 @@
 package webuildit.myStartup.service;
 
 import org.springframework.stereotype.Service;
+import webuildit.myStartup.dto.StartupDTO;
 import webuildit.myStartup.model.Startup;
 import webuildit.myStartup.repository.CustomerRepository;
 import webuildit.myStartup.repository.TransactionRepository;
 import webuildit.myStartup.repository.VendorRepository;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class StartupServiceImpl implements StartupService{
@@ -46,8 +48,8 @@ public class StartupServiceImpl implements StartupService{
         return String.valueOf(List1-List2);
     }
 
-    public Startup getStatic(int month, int year){
-        Startup s1 = new Startup();
+    public StartupDTO getStatic(int month, int year){
+        StartupDTO s1 = new StartupDTO();
         s1.setRevenue(transactionRepository.findSumOfAllTransactionsByDay(month, year));
         s1.setClassificationsUp(String.valueOf(vendorRepository.findAllTop3Asc(month, year)));
         s1.setClassificationsDown(String.valueOf(vendorRepository.findTop3Desc(month, year)));
@@ -55,6 +57,24 @@ public class StartupServiceImpl implements StartupService{
         s1.setDifference(this.compareIncomeBeetweenOneMonth(month, year));
 
         return s1;
+    }
+
+    @Override
+    public String findSumOfAllTransactionsByDay(int month, int year) {
+        String sum = transactionRepository.findSumOfAllTransactionsByDay(month, year);
+        return sum;
+    }
+
+    @Override
+    public List<String> findTop3Desc(int month, int year) {
+        List<String> tmp = vendorRepository.findTop3Desc(month, year);
+        return tmp;
+    }
+
+    @Override
+    public List<String> findAllTop3Asc(int month, int year) {
+        List<String> tmp = vendorRepository.findAllTop3Asc( month, year);
+        return tmp;
     }
 
 
