@@ -11,7 +11,9 @@ import java.util.List;
 public interface CreditcardtransactionMapper {
 
     CreditcardtransactionDTO creditcardtransactionToCreditcardtransactionDTO(Creditcardtransaction cct);
+
     List<CreditcardtransactionDTO> creditcardtransactionsToCreditcardtransactionDTOs(List<Creditcardtransaction> ccts);
+
     @InheritInverseConfiguration
     Creditcardtransaction creditcardtransactionDTOToCreditcardtransaction(CreditcardtransactionDTO cctDTO);
 }

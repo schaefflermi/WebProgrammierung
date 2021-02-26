@@ -3,13 +3,10 @@ package webuildit.myStartup.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import webuildit.myStartup.model.Customer;
-import webuildit.myStartup.model.Vendor;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 @Getter
 @Setter

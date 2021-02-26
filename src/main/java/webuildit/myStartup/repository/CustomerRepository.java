@@ -2,7 +2,6 @@ package webuildit.myStartup.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import webuildit.myStartup.model.Creditcardtransaction;
 import webuildit.myStartup.model.Customer;
 
 import java.util.List;

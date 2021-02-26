@@ -11,7 +11,7 @@ import webuildit.myStartup.model.Creditcardtransaction;
 import webuildit.myStartup.model.Customer;
 import webuildit.myStartup.model.Vendor;
 import webuildit.myStartup.repository.CustomerRepository;
-import webuildit.myStartup.repository.TransactionRepository;
+import webuildit.myStartup.repository.CreditcardtransactionRepository;
 import webuildit.myStartup.repository.VendorRepository;
 import webuildit.myStartup.service.StartupService;
 import webuildit.myStartup.service.VendorService;
@@ -27,14 +27,14 @@ public class ManualTestBean {
     // sie sollte nie in einer produktiven Applikation sein.
 
     CreditcardtransactionControllerImpl CCTControllerImpl;
-    TransactionRepository transactionRepository;
+    CreditcardtransactionRepository transactionRepository;
     VendorRepository vendorRepository;
     VendorService vendorService;
     CustomerRepository customerRepository;
     StartupService startupService;
 
 
-    ManualTestBean(CreditcardtransactionControllerImpl CCTControllerImpl, TransactionRepository transactionRepository, VendorRepository vendorRepository, VendorService vendorService, CustomerRepository customerRepository, StartupService startupService){
+    ManualTestBean(CreditcardtransactionControllerImpl CCTControllerImpl, CreditcardtransactionRepository transactionRepository, VendorRepository vendorRepository, VendorService vendorService, CustomerRepository customerRepository, StartupService startupService){
         this.CCTControllerImpl = CCTControllerImpl;
         this.transactionRepository = transactionRepository;
         this.vendorRepository = vendorRepository;
@@ -169,11 +169,11 @@ public class ManualTestBean {
         log.info(String.valueOf(v5.getVUuid()));
         log.info(String.valueOf(v6.getVUuid()));
         log.info(String.valueOf(v7.getVUuid()));
-        vendorService.getStatisticsAboutMonth(2,2021);
+//        vendorService.getStatisticsAboutMonth(2,2021);
         log.info("-------------Aufgabe 1.1 -------------");
         log.info(vendorService.getFeeForVendor(v6.getVUuid()));
-//        log.info(startupService.compareIncomeBeetweenOneMonth());
-        log.info(startupService.getStatic(1,2021).getCustomers());
+        log.info(startupService.compareIncomeBeetweenOneMonth(1, 2021));
+        log.info(startupService.getStatistic(1,2021).getCustomers());
 
 
 

@@ -27,8 +27,4 @@ public enum Classification {
 //    GesundheitsSozialwesen,
 //    KunstUnterhaltung;
 
-    //Konstruktor
-    private Classification(){
-
-    }
 }

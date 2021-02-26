@@ -1,10 +1,8 @@
 package webuildit.myStartup.service;
 
 import org.springframework.stereotype.Service;
-import webuildit.myStartup.dto.CreditcardtransactionDTO;
 import webuildit.myStartup.dto.CustomerDTO;
 import webuildit.myStartup.mapper.CustomerMapper;
-import webuildit.myStartup.model.Creditcardtransaction;
 import webuildit.myStartup.model.Customer;
 import webuildit.myStartup.repository.CustomerRepository;
 

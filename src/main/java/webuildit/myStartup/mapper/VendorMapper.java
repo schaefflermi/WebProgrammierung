@@ -2,7 +2,6 @@ package webuildit.myStartup.mapper;
 
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import webuildit.myStartup.dto.VendorDTO;
 import webuildit.myStartup.model.Vendor;
 

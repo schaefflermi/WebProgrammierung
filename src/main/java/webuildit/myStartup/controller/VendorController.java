@@ -12,9 +12,4 @@ public interface VendorController {
     VendorDTO updateVendor(UUID vUuid, VendorDTO vendorDTO);
     void removeVendorById(UUID vUuid);
     String getFeeForVendor(UUID vUuid);
-//    String findSumOfAllTransactionsByDay(int month, int year);
-//    List<String> findTop3Desc(int month, int year);
-//    List<String> findAllTop3Asc(int month, int year);
-//    String compareIncomeBeetweenOneMonth(int month, int year);
-//    String getStatisticForOneMonth(int month, int year);
 }
