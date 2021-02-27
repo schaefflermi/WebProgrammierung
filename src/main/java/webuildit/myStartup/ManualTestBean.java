@@ -89,8 +89,8 @@ public class ManualTestBean {
 
 // do Fehlermeldung, wenn sum > netIncome -> kunde muss zahlen können!!!
 
-        //Ordne den Transaktionen Kunden zu
-        c1.setCustomer(customer_1);
+       // Ordne den Transaktionen Kunden zu
+        //c1.setCustomer(customer_1);
         c2.setCustomer(customer_2);
         c3.setCustomer(customer_3);
         c4.setCustomer(customer_4);
@@ -114,7 +114,7 @@ public class ManualTestBean {
         c22.setCustomer(customer_2);
 
         //Ordne den Transaktionen Verkäufer zu
-        c1.setVendor(v1);
+      //  c1.setVendor(v1);
         c2.setVendor(v2);
         c3.setVendor(v3);
         c4.setVendor(v4);
@@ -138,7 +138,7 @@ public class ManualTestBean {
         c22.setVendor(v6);
 
         // speichern wir irgendwo Kunden & Verkäufer?
-        v1.setTransactions(Arrays.asList(c1, c21));
+        /*v1.setTransactions(Arrays.asList(c1, c21));
         v2.setTransactions(Arrays.asList(c2, c12, c16, c17, c18, c19, c20));
         v3.setTransactions(Arrays.asList(c3));
         v4.setTransactions(Arrays.asList(c4));
@@ -152,23 +152,18 @@ public class ManualTestBean {
         customer_3.setTransactions(Arrays.asList(c3, c9, c16, c17, c18, c19, c20));
         customer_4.setTransactions(Arrays.asList(c4, c8));
         customer_5.setTransactions(Arrays.asList(c5, c10));
-        customer_6.setTransactions(Arrays.asList(c11, c12, c13, c14, c15));
+        customer_6.setTransactions(Arrays.asList(c11, c12, c13, c14, c15));*/
         //Speichere alle Daten in den Repositorys ab
         System.out.println("test2");
-        this.transactionRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22));
-        System.out.println("test3");
         this.customerRepository.saveAll(Arrays.asList(customer_1, customer_2, customer_3, customer_4, customer_5, customer_6));
         System.out.println("test4");
         this.vendorRepository.saveAll(Arrays.asList(v1,v2,v3,v4,v5,v6, v7));
+        this.transactionRepository.saveAll(Arrays.asList(c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22));
+        System.out.println("test3");
+
         System.out.println("test5");
         // Gibt alle Werte der ersten Aufgabe zurück
-        log.info(String.valueOf(v1.getVUuid()));
-        log.info(String.valueOf(v2.getVUuid()));
-        log.info(String.valueOf(v3.getVUuid()));
-        log.info(String.valueOf(v4.getVUuid()));
-        log.info(String.valueOf(v5.getVUuid()));
-        log.info(String.valueOf(v6.getVUuid()));
-        log.info(String.valueOf(v7.getVUuid()));
+
 //        vendorService.getStatisticsAboutMonth(2,2021);
         log.info("-------------Aufgabe 1.1 -------------");
         log.info(vendorService.getFeeForVendor(v6.getVUuid()));

@@ -63,23 +63,5 @@ public class StartupServiceImpl implements StartupService{
         return new StartupDTO(s1.getSUuid(), s1.getRevenue(), s1.getClassificationsDown(), s1.getClassificationsUp(), s1.getCustomers(), s1.getDifference());
     }
 
-    @Override
-    public String findSumOfAllTransactionsByDay(int month, int year) {
-        String sum = startupRepository.findSumOfAllTransactionsByDay(month, year);
-        return sum;
-    }
-
-    @Override
-    public List<String> findTop3Desc(int month, int year) {
-        List<String> tmp = startupRepository.findTop3Desc(month, year);
-        return tmp;
-    }
-
-    @Override
-    public List<String> findAllTop3Asc(int month, int year) {
-        List<String> tmp = startupRepository.findAllTop3Asc( month, year);
-        return tmp;
-    }
-
 
 }

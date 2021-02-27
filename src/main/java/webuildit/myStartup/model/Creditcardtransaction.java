@@ -27,12 +27,12 @@ public class Creditcardtransaction {
 
 
     // 1:n Beziehung zu Kunde
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="customer_id", nullable = true)
     private Customer customer;
 
     // 1:n Beziehung zu Verkäufer
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="vendor_id", nullable = true)
     private Vendor vendor;
 
@@ -43,5 +43,4 @@ public class Creditcardtransaction {
         this.status = status;
         this.tdate = tdate;
     }
-
 }
