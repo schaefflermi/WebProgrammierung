@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import webuildit.myStartup.dto.CreditcardtransactionDTO;
 import webuildit.myStartup.mapper.CreditcardtransactionMapper;
 import webuildit.myStartup.model.Creditcardtransaction;
-import webuildit.myStartup.repository.TransactionRepository;
+import webuildit.myStartup.repository.CreditcardtransactionRepository;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -18,10 +18,10 @@ import java.util.UUID;
 @Service
 public class CreditcardtransactionServiceImpl implements CreditcardtransactionService{
 
-    TransactionRepository transactionRepository;
+    CreditcardtransactionRepository transactionRepository;
     CreditcardtransactionMapper creditcardtransactionMapper;
 
-    public CreditcardtransactionServiceImpl(TransactionRepository transactionRepository, CreditcardtransactionMapper creditcardtransactionMapper){
+    public CreditcardtransactionServiceImpl(CreditcardtransactionRepository transactionRepository, CreditcardtransactionMapper creditcardtransactionMapper){
         this.transactionRepository = transactionRepository;
         this.creditcardtransactionMapper = creditcardtransactionMapper;
     }

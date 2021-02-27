@@ -3,10 +3,8 @@ package webuildit.myStartup.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import webuildit.myStartup.model.Creditcardtransaction;
 
 import javax.validation.constraints.Min;
-import java.util.List;
 import java.util.UUID;
 @Getter
 @Setter

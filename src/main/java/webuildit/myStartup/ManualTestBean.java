@@ -11,8 +11,9 @@ import webuildit.myStartup.model.Creditcardtransaction;
 import webuildit.myStartup.model.Customer;
 import webuildit.myStartup.model.Vendor;
 import webuildit.myStartup.repository.CustomerRepository;
-import webuildit.myStartup.repository.TransactionRepository;
+import webuildit.myStartup.repository.CreditcardtransactionRepository;
 import webuildit.myStartup.repository.VendorRepository;
+import webuildit.myStartup.service.StartupService;
 import webuildit.myStartup.service.VendorService;
 
 import java.time.LocalDate;
@@ -26,18 +27,20 @@ public class ManualTestBean {
     // sie sollte nie in einer produktiven Applikation sein.
 
     CreditcardtransactionControllerImpl CCTControllerImpl;
-    TransactionRepository transactionRepository;
+    CreditcardtransactionRepository transactionRepository;
     VendorRepository vendorRepository;
     VendorService vendorService;
     CustomerRepository customerRepository;
+    StartupService startupService;
 
 
-    ManualTestBean(CreditcardtransactionControllerImpl CCTControllerImpl, TransactionRepository transactionRepository, VendorRepository vendorRepository, VendorService vendorService, CustomerRepository customerRepository){
+    ManualTestBean(CreditcardtransactionControllerImpl CCTControllerImpl, CreditcardtransactionRepository transactionRepository, VendorRepository vendorRepository, VendorService vendorService, CustomerRepository customerRepository, StartupService startupService){
         this.CCTControllerImpl = CCTControllerImpl;
         this.transactionRepository = transactionRepository;
         this.vendorRepository = vendorRepository;
         this.vendorService = vendorService;
         this.customerRepository = customerRepository;
+        this.startupService = startupService;
 
 
     }
@@ -52,6 +55,7 @@ public class ManualTestBean {
         Customer customer_4 = new Customer("Rafael Fogel", "Wiesenstraße 13 76684 Östringen", 60000);
         Customer customer_5 = new Customer ("Andreas Müller", "Merianstraße 7 69168 Wiesloch", 130000);
         Customer customer_6 = new Customer("Fail Ure", "Can't do it 5 34921 Nothappening", 0);
+
         Vendor v1 = new Vendor("Thyssen Schachtbau Holding GmbH", "Sandstraße 107/135, 45473 Mülheim an der Ruhr", Classification.BERGBAU);
         Vendor v2 = new Vendor("ECORA GmbH", "Am Blätterrangen 2 95659 Arzberg", Classification.LANDFORSTWIRTSCHAFT);
         Vendor v3 = new Vendor( "SAP SE", "Dietmar-Hopp-Allee 16 69190 Walldorf", Classification.DIENSTLEISTUNGEN);
@@ -77,20 +81,16 @@ public class ManualTestBean {
         Creditcardtransaction c15 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
         Creditcardtransaction c16 = new Creditcardtransaction("fail1", 50, false, LocalDate.of(2020, 04, 19));
         Creditcardtransaction c17 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
-        Creditcardtransaction c18 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 02, 24));
-        Creditcardtransaction c19 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 02, 24));
+        Creditcardtransaction c18 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
+        Creditcardtransaction c19 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
         Creditcardtransaction c20 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
         Creditcardtransaction c21 = new Creditcardtransaction("fail2", 1550, false, LocalDate.of(2021, 01, 24));
         Creditcardtransaction c22 = new Creditcardtransaction("Beck builds a terrasse", 3000, true, LocalDate.of(2021, 02,03));
 
-
-
-
-
 // do Fehlermeldung, wenn sum > netIncome -> kunde muss zahlen können!!!
 
-        //Ordne den Transaktionen Kunden zu
-        c1.setCustomer(customer_1);
+       // Ordne den Transaktionen Kunden zu
+        //c1.setCustomer(customer_1);
         c2.setCustomer(customer_2);
         c3.setCustomer(customer_3);
         c4.setCustomer(customer_4);
@@ -114,7 +114,7 @@ public class ManualTestBean {
         c22.setCustomer(customer_2);
 
         //Ordne den Transaktionen Verkäufer zu
-        c1.setVendor(v1);
+      //  c1.setVendor(v1);
         c2.setVendor(v2);
         c3.setVendor(v3);
         c4.setVendor(v4);
@@ -126,8 +126,8 @@ public class ManualTestBean {
         c10.setVendor(v6);
         c11.setVendor(v6);
         c12.setVendor(v2);
-        c13.setVendor(v4);
-        c14.setVendor(v3);
+        c13.setVendor(v6);
+        c14.setVendor(v6);
         c15.setVendor(v6);
         c16.setVendor(v2);
         c17.setVendor(v2);
@@ -137,18 +137,14 @@ public class ManualTestBean {
         c21.setVendor(v1);
         c22.setVendor(v6);
 
-
-
-        // speichere alle Transaktionen
-        this.transactionRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15));
         // speichern wir irgendwo Kunden & Verkäufer?
-        v1.setTransactions(Arrays.asList(c1, c12, c21));
-        v2.setTransactions(Arrays.asList(c2,c16, c17, c18, c19, c20));
+        /*v1.setTransactions(Arrays.asList(c1, c21));
+        v2.setTransactions(Arrays.asList(c2, c12, c16, c17, c18, c19, c20));
         v3.setTransactions(Arrays.asList(c3));
         v4.setTransactions(Arrays.asList(c4));
         v5.setTransactions(Arrays.asList(c5));
-        v6.setTransactions(Arrays.asList(c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c22));
-        this.vendorRepository.saveAll(Arrays.asList(v1,v2,v3,v4,v5,v6));
+        v6.setTransactions(Arrays.asList(c6, c7, c8, c9, c10, c11, c13, c14, c15, c22));
+
 
         //Ordne den Kunden Transaktionen zu
         customer_1.setTransactions(Arrays.asList(c1, c6, c21));
@@ -156,14 +152,23 @@ public class ManualTestBean {
         customer_3.setTransactions(Arrays.asList(c3, c9, c16, c17, c18, c19, c20));
         customer_4.setTransactions(Arrays.asList(c4, c8));
         customer_5.setTransactions(Arrays.asList(c5, c10));
-        customer_6.setTransactions(Arrays.asList(c11, c12, c13, c14, c15));
-        this.customerRepository.saveAll(Arrays.asList(customer_1, customer_2, customer_3, customer_4,customer_5, customer_6));
+        customer_6.setTransactions(Arrays.asList(c11, c12, c13, c14, c15));*/
+        //Speichere alle Daten in den Repositorys ab
+        System.out.println("test2");
+        this.customerRepository.saveAll(Arrays.asList(customer_1, customer_2, customer_3, customer_4, customer_5, customer_6));
+        System.out.println("test4");
+        this.vendorRepository.saveAll(Arrays.asList(v1,v2,v3,v4,v5,v6, v7));
+        this.transactionRepository.saveAll(Arrays.asList(c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22));
+        System.out.println("test3");
 
+        System.out.println("test5");
         // Gibt alle Werte der ersten Aufgabe zurück
-        vendorService.getStatisticsAboutMonth(2,2021);
+
+//        vendorService.getStatisticsAboutMonth(2,2021);
         log.info("-------------Aufgabe 1.1 -------------");
         log.info(vendorService.getFeeForVendor(v6.getVUuid()));
-       vendorService.compareIncomeBeetweenOneMonth(11,2020);
+        log.info(startupService.compareIncomeBeetweenOneMonth(1, 2021));
+        log.info(startupService.getStatistic(1,2021).getCustomers());
 
 
 
