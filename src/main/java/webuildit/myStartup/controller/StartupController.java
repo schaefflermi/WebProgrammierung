@@ -1,6 +1,8 @@
 package webuildit.myStartup.controller;
 
+import webuildit.myStartup.dto.StartupDTO;
+
 public interface StartupController {
 
-    String getStatisticForOneMonth(int month, int year);
+    StartupDTO getStatisticForOneMonth(int month, int year);
 }

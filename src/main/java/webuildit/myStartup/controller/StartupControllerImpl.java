@@ -22,16 +22,10 @@ public class StartupControllerImpl implements StartupController{
 
     @Override
     @GetMapping("/2/{month}/{year}")
-    public String getStatisticForOneMonth(@PathVariable("month") int month, @PathVariable("year") int year) {
+    public StartupDTO getStatisticForOneMonth(@PathVariable("month") int month, @PathVariable("year") int year) {
         try {
-            StartupDTO s1 = startupService.getStatistic(month, year);
-            String tmp;
-            tmp = "Statistik für den eingegeben Monat \n Summe: " + s1.getRevenue() + "\n"
-                    + "Die 3 Gewerbe mit den höchsten Umsatz: " + s1.getClassificationsDown() + "\n"
-                    + "Die 3 Gewerbe mit den niedrigsten Umsatz: " + s1.getClassificationsUp() + "\n"
-                    + "Kunden mit 5 fehlgeschlagenen Transaktionen: " + s1.getCustomers() + "\n"
-                    + "Differenz zum Vormonat: " + s1.getDifference();
-            return tmp;
+           StartupDTO s1 = startupService.getStatistic(month, year);
+            return s1;
         } catch (NullPointerException exception) {
             throw new NullPointerException();
 
