@@ -19,6 +19,7 @@ import java.util.UUID;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -46,6 +47,7 @@ public class VendorControllerImplTest {
     private VendorDTO vendor1;
     private VendorDTO vendor2;
     private VendorDTO vendor3;
+    String sum;
 
     private final String controllerPath="/api/v1/vendors";
 
@@ -55,6 +57,7 @@ public class VendorControllerImplTest {
         vendor2 = new VendorDTO(UUID.fromString("d440b7ad-5e0d-4f17-9fac-aa506e863f09"), "ECORA GmbH", "Am Blätterrangen 2 95659 Arzberg", Classification.LANDFORSTWIRTSCHAFT);
         vendor3 = new VendorDTO(UUID.fromString("f624c5b1-6b40-468a-810f-f47600a8b1dd"), "SAP SE", "Dietmar-Hopp-Allee 16 69190 Walldorf", Classification.DIENSTLEISTUNGEN);
         this.vendorList = Arrays.asList(vendor1, vendor2, vendor3);
+        sum = "500";
     }
 
     @Test
@@ -115,6 +118,13 @@ public class VendorControllerImplTest {
         verify(vendorService).removeVendorById(any());
     }
 
-
-
+    @Test
+    public void shouldReturnFeeForOneVendor() throws Exception{
+        when(vendorService.getFeeForVendor(any())).thenReturn(sum);
+        this.mockMvc.perform(get(controllerPath+"/1.1/"+vendor1.getVUuid()))
+                .andExpect(status().isOk())
+                .andExpect(result -> sum.toString())
+                .andDo(print());
+        verify(vendorService).getFeeForVendor(any());
+    }
 }

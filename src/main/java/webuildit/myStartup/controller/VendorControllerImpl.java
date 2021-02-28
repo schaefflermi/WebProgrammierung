@@ -54,10 +54,9 @@ public class VendorControllerImpl implements VendorController{
         try{
             return this.vendorService.getVendorByUUID(vUuid);
         } catch(NoSuchElementException noSuchElementException){
-            throw new NoSuchElementException("Der Verkäufer mit dieser UUID existiert nicht.");
+            throw new NoSuchElementException("The vendor with this UUID does not exist.");
         }
     }
-
 
 
     // Methode mit Dokumentation, die einen Verkäufer hinzufügt.
@@ -90,7 +89,7 @@ public class VendorControllerImpl implements VendorController{
             @ApiResponse(responseCode = "500", description = "An error occurred during processing")
     })
     @PutMapping("/{vuuid}")
-    public VendorDTO updateVendor(@Parameter(description = "The unique vendorId")
+    public VendorDTO updateVendor(@Parameter(description = "The unique vendorUUID")
                                 @PathVariable("vuuid") UUID vUuid,
                                 @Parameter(description = "The updated vendorDTO")
                                 @Valid @RequestBody VendorDTO vendorDTO) {
@@ -125,13 +124,21 @@ public class VendorControllerImpl implements VendorController{
 
     }
 
-    // ab hier noch Doku machen!!!
+    // muss das nicht auch eher in den Startup-Controller? Für wen berechnen wir das? Also soll der Vendor wissen,
+    // was er an das Startup zahlt oder das Startup, was es von dem einzelnen Vendor bekommt?
     @Override
+    @Operation(summary = "Returns the amount the vendor has to pay to the startup.",
+            description = "This operation returns the amount the vendor has to pay " +
+            "for the selected vendorUUID as a Double")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "The amount is returned successfully"),
+            //   @ApiResponse(responseCode = "404", description = "The given parameters do not match the validation criteria"),
+            @ApiResponse(responseCode = "500", description = "An error occurred during processing")
+    })
     @GetMapping("/1.1/{vuuid}")
-    public String getFeeForVendor(@PathVariable("vuuid")UUID vUuid) {
-
+    public String getFeeForVendor(@Parameter(description = "The unique vendorUUID")
+                                      @PathVariable("vuuid")UUID vUuid) {
         String sum;
-
         try {
             sum = vendorService.getFeeForVendor(vUuid);
         } catch (EntityNotFoundException notFoundException) {

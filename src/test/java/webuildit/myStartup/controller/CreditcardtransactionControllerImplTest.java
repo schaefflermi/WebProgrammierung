@@ -5,16 +5,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import webuildit.myStartup.controller.CreditcardtransactionController;
 import webuildit.myStartup.dto.CreditcardtransactionDTO;
-import webuildit.myStartup.dto.CustomerDTO;
-import webuildit.myStartup.model.Creditcardtransaction;
 import webuildit.myStartup.service.CreditcardtransactionService;
-import webuildit.myStartup.service.CustomerService;
 
 import java.time.LocalDate;
 import java.util.Arrays;

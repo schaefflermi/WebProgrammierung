@@ -44,6 +44,9 @@ public class CustomerControllerImplTest {
     private CustomerDTO customer1;
     private CustomerDTO customer2;
     private CustomerDTO customer3;
+    List<String> failedCustomers;
+    private int month;
+    private int year;
 
     private final String controllerPath="/api/v1/customers";
 
@@ -53,6 +56,9 @@ public class CustomerControllerImplTest {
         customer2 = new CustomerDTO(UUID.fromString("0ffaaf57-6ac3-46ac-a3b3-5dd908a98c9b"), "Anja Beck", "Köpenicker Straße 47 10179 Berlin", 70000);
         customer3 = new CustomerDTO(UUID.fromString("5ffaac1b-f85c-42c7-ac28-0be62734bec4"), "Tony Smith", "Gustav-Landauer-Bogen 5 80797 München", 90000);
         this.customerList = Arrays.asList(customer1, customer2, customer3);
+        this.failedCustomers = Arrays.asList("Andreas Müller", "Anja Beck");
+        this.month = 01;
+        this.year = 2021;
     }
 
     @Test
@@ -113,5 +119,13 @@ public class CustomerControllerImplTest {
         verify(customerService).removeCustomerById(any());
     }
 
-
+    @Test
+    public void shouldReturnCustomersWithFiveFailedTransactions() throws Exception{
+        when(customerService.findAllCustomerWithFiveFailedTransaction(month, year)).thenReturn(failedCustomers);
+        this.mockMvc.perform((get(controllerPath+"/1.4/"+month+"/"+year)))
+                .andExpect(status().isOk())
+                .andExpect(result -> failedCustomers.forEach(customer -> customer.toString()))
+                .andDo(print());
+        verify(customerService).findAllCustomerWithFiveFailedTransaction(month, year);
+    }
 }
