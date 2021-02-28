@@ -3,7 +3,9 @@ package webuildit.myStartup.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import webuildit.myStartup.model.Customer;
 
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -12,13 +14,13 @@ import java.util.UUID;
 public class StartupDTO {
 
     private UUID sUuid;
-    private String revenue;
+    private double revenue;
     private String classificationsDown;
     private String classificationsUp;
     private String customers;
-    private String difference;
+    private double difference;
 
-    public StartupDTO(UUID sUuid, String revenue, String classificationsDown, String classificationsUp, String customers, String difference){
+    public StartupDTO(UUID sUuid, double revenue, String classificationsDown, String classificationsUp, String customers, double difference){
         this.sUuid = sUuid;
         this.revenue = revenue;
         this.classificationsDown = classificationsDown;

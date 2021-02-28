@@ -18,13 +18,13 @@ public class Startup {
     @Column(name = "UUID",  unique = true, nullable = false)
     private UUID sUuid = UUID.randomUUID();
 
-    private String revenue;
+    private double revenue;
     private String classificationsDown;
     private String classificationsUp;
     private String customers;
-    private String difference;
+    private double difference;
 
-    public Startup(UUID sUuid, String revenue, String classificationsDown, String classificationsUp, String customers, String difference){
+    public Startup(UUID sUuid, double revenue, String classificationsDown, String classificationsUp, String customers, double difference){
         this.sUuid = sUuid;
         this.revenue = revenue;
         this.classificationsDown = classificationsDown;

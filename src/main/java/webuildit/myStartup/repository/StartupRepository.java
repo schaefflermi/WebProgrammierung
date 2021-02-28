@@ -23,7 +23,7 @@ public interface StartupRepository extends JpaRepository<Startup, UUID> {
 
     //Aufgabe 1.2 : Die Einnahmen des Starups für einen konkreten Monat
     @Query("Select sum(c.sum) * c.TFEE from Creditcardtransaction c where month(c.tdate) = :param1 and year(c.tdate) = :param2 and c.status=true")
-    String findSumOfAllTransactionsByDay(@Param("param1")int month, @Param("param2")int year);
+    Double findSumOfAllTransactionsByDay(@Param("param1")int month, @Param("param2")int year);
 
     // für Aufgabe 1.5 - Einnahmen des aktuellen Monats
     @Query("Select SUM(c.sum) * c.TFEE from Creditcardtransaction c where month(c.tdate) = :param1 and year(c.tdate) = :param2 and c.status=true and c.tdate <= CURRENT_TIMESTAMP ")

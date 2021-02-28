@@ -167,7 +167,7 @@ public class ManualTestBean {
 //        vendorService.getStatisticsAboutMonth(2,2021);
         log.info("-------------Aufgabe 1.1 -------------");
         log.info(vendorService.getFeeForVendor(v6.getVUuid()));
-        log.info(startupService.compareIncomeBeetweenOneMonth(1, 2021));
+        log.info(String.valueOf(startupService.compareIncomeBeetweenOneMonth(1, 2021)));
         log.info(startupService.getStatistic(1,2021).getCustomers());
 
 

@@ -25,7 +25,7 @@ public class StartupServiceImpl implements StartupService{
         this.transactionRepository = transactionRepository;
         this.startupMapper = startupMapper;
     }
-    public String compareIncomeBeetweenOneMonth(int month, int year) {
+    public Double compareIncomeBeetweenOneMonth(int month, int year) {
         // Das derzeitige Datum
         LocalDate date1 = LocalDate.now();
         // Derzeitiges Datum wird um 1 reduziert
@@ -48,15 +48,21 @@ public class StartupServiceImpl implements StartupService{
             List2 = 0.0;
         }
         // Differenz der beiden Summen
-        return String.valueOf(List1-List2);
+        return (List1-List2);
     }
 
     public StartupDTO getStatistic(int month, int year){
         Startup s1 = new Startup();
+        try {
+
+
         s1.setRevenue(startupRepository.findSumOfAllTransactionsByDay(month, year));
+        } catch (java.lang.NullPointerException nullPointerException) {
+        s1.setRevenue(0);
+        }
         s1.setClassificationsUp(String.valueOf(startupRepository.findAllTop3Asc(month, year)));
         s1.setClassificationsDown(String.valueOf(startupRepository.findTop3Desc(month, year)));
-        s1.setCustomers(String.valueOf(customerRepository.findAllCustomerWithFiveFailedTransaction(month, year)));
+        s1.setCustomers(String.valueOf((customerRepository.findAllCustomerWithFiveFailedTransaction(month, year))));
         s1.setDifference(this.compareIncomeBeetweenOneMonth(month, year));
 
         startupRepository.save(s1);
